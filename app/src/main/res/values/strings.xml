@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AlgoMasterApp</string>
     <string name="app_title">AlgoMaster</string>
+    <string name="RevFeed_Title">Revision Feed</string>
 </resources>

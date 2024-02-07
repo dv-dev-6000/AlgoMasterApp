@@ -9,15 +9,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-public class HomeScreen extends AppCompatActivity {
+public class UserProfile extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_screen);
+        setContentView(R.layout.activity_user_profile);
 
         // set toolbar as action bar
-        Toolbar toolbar = findViewById(R.id.toolbar_home);
+        Toolbar toolbar = findViewById(R.id.toolbar_profile);
         setSupportActionBar(toolbar);
     }
 
@@ -34,11 +34,11 @@ public class HomeScreen extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         if (item.getItemId() == R.id.menuItem_Home){
-            // already home
+            Intent intent = new Intent(UserProfile.this, HomeScreen.class);
+            startActivity(intent);
         }
         else if (item.getItemId() == R.id.menuItem_Profile){
-            Intent intent = new Intent(HomeScreen.this, UserProfile.class);
-            startActivity(intent);
+            // already in profile
         }
 
         return super.onOptionsItemSelected(item);
