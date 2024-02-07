@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class UserProfile extends AppCompatActivity {
 
@@ -19,6 +21,15 @@ public class UserProfile extends AppCompatActivity {
         // set toolbar as action bar
         Toolbar toolbar = findViewById(R.id.toolbar_profile);
         setSupportActionBar(toolbar);
+
+        Button viewAchievementsButton = findViewById(R.id.button_viewAchievements);
+        viewAchievementsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserProfile.this, UserAchievements.class);
+                startActivity(intent);
+            }
+        });
     }
 
     // bind the menu to the actionbar
