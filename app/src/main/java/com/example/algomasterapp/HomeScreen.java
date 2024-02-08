@@ -2,6 +2,8 @@ package com.example.algomasterapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,16 +11,38 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomeScreen extends AppCompatActivity {
+
+    private RecyclerView revFeedRecView;
+    private RecyclerView.Adapter revFeedAdapter;
+    private RecyclerView.LayoutManager revFeedLayoutMan;
+
+    List<RevisionItem> revItemList = new ArrayList<RevisionItem>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
 
+        // fill up the revision item list
+        fillRevItemList();
+
         // set toolbar as action bar
         Toolbar toolbar = findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
+
+        // Set up Rev Feed Recycler View
+        revFeedRecView = (RecyclerView) findViewById(R.id.RecView_RevisionFeed);
+        revFeedRecView.setHasFixedSize(true);
+
+        revFeedLayoutMan = new LinearLayoutManager(this);
+        revFeedRecView.setLayoutManager(revFeedLayoutMan);
+
+        revFeedAdapter = new RecViewAdapter_RevFeed(revItemList, HomeScreen.this);
+        revFeedRecView.setAdapter(revFeedAdapter);
     }
 
     // bind the menu to the actionbar
@@ -42,5 +66,21 @@ public class HomeScreen extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void fillRevItemList() {
+        RevisionItem test1 = new RevisionItem("Did You Know?", "the revision feed contains helpful tips and reminders reflecting on modules you have completed", false, "");
+        RevisionItem test2 = new RevisionItem("Remember!", "Complete all the lessons in a module to unlock new content", true, "test");
+        RevisionItem test3 = new RevisionItem("Remember!", "Check your profile to review your achievements", false, "");
+        RevisionItem test4 = new RevisionItem("Remember!", "Check \n your profile to \n review your achievements", false, "");
+        RevisionItem test5 = new RevisionItem("Remember!", "Check \nyour profile \nto review \nyour achievements", true, "stack");
+        RevisionItem test6 = new RevisionItem("Remember!", "Check your profile to review your achievements", false, "");
+
+        revItemList.add(test1);
+        revItemList.add(test2);
+        revItemList.add(test3);
+        revItemList.add(test4);
+        revItemList.add(test5);
+        revItemList.add(test6);
     }
 }
