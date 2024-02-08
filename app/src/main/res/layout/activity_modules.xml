@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Modules">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_Modules"
+        android:layout_width="420dp"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/moduleBackOne"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/moduleBackTwo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_Modules"
+        app:srcCompat="@color/material_dynamic_neutral90" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="@+id/moduleBackOne"
+        app:layout_constraintEnd_toEndOf="@+id/moduleBackOne"
+        app:layout_constraintStart_toStartOf="@+id/moduleBackOne" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/orbitron"
+        android:text="Data Structures"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView14"
+        app:layout_constraintEnd_toEndOf="@+id/moduleBackOne"
+        app:layout_constraintStart_toStartOf="@+id/moduleBackOne" />
+
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/moduleBackOne"
+        app:layout_constraintEnd_toEndOf="@+id/moduleBackOne"
+        app:layout_constraintStart_toStartOf="@+id/moduleBackOne"
+        app:layout_constraintTop_toTopOf="@+id/moduleBackOne" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/orbitron"
+        android:text="Lvl 1"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar3"
+        app:layout_constraintEnd_toEndOf="@+id/moduleBackOne"
+        app:layout_constraintStart_toStartOf="@+id/moduleBackOne" />
+
+    <ImageView
+        android:id="@+id/moduleBackTwo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/moduleBackThree"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moduleBackOne"
+        app:srcCompat="@color/material_dynamic_neutral90" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="@+id/moduleBackTwo"
+        app:layout_constraintEnd_toEndOf="@+id/moduleBackTwo"
+        app:layout_constraintStart_toStartOf="@+id/moduleBackTwo" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/orbitron"
+        android:text="Algorithms"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="@+id/moduleBackTwo"
+        app:layout_constraintStart_toStartOf="@+id/moduleBackTwo" />
+
+    <ProgressBar
+        android:id="@+id/progressBar4"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/moduleBackTwo"
+        app:layout_constraintEnd_toEndOf="@+id/moduleBackTwo"
+        app:layout_constraintStart_toStartOf="@+id/moduleBackTwo"
+        app:layout_constraintTop_toTopOf="@+id/moduleBackTwo" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/orbitron"
+        android:text="Lvl 2"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar4"
+        app:layout_constraintEnd_toEndOf="@+id/moduleBackTwo"
+        app:layout_constraintStart_toStartOf="@+id/moduleBackTwo" />
+
+    <ImageView
+        android:id="@+id/moduleBackThree"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/moduleBackTwo"
+        app:srcCompat="@color/material_dynamic_neutral90" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="@+id/moduleBackThree"
+        app:layout_constraintEnd_toEndOf="@+id/moduleBackThree"
+        app:layout_constraintStart_toStartOf="@+id/moduleBackThree" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/orbitron"
+        android:text="Advanced"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/textView16"
+        app:layout_constraintEnd_toEndOf="@+id/moduleBackThree"
+        app:layout_constraintStart_toStartOf="@+id/moduleBackThree" />
+
+    <ProgressBar
+        android:id="@+id/progressBar5"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/moduleBackThree"
+        app:layout_constraintEnd_toEndOf="@+id/moduleBackThree"
+        app:layout_constraintStart_toStartOf="@+id/moduleBackThree"
+        app:layout_constraintTop_toTopOf="@+id/moduleBackThree" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/orbitron"
+        android:text="Lvl 3"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar5"
+        app:layout_constraintEnd_toEndOf="@+id/moduleBackThree"
+        app:layout_constraintStart_toStartOf="@+id/moduleBackThree" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

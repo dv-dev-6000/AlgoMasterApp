@@ -8,9 +8,11 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="369dp"
+        android:layout_width="0dp"
         android:layout_height="95dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_home"
@@ -19,8 +21,11 @@
     <ProgressBar
         android:id="@+id/progressBar2"
         style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="271dp"
-        android:layout_height="36dp"
+        android:layout_width="0dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:max="100"
         android:progress="25"
         android:progressTint="#4CAF50"
@@ -29,9 +34,11 @@
         app:layout_constraintStart_toStartOf="@+id/imageView" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="388dp"
-        android:layout_height="483dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +58,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_home"
-        android:layout_width="412dp"
+        android:layout_width="0dp"
         android:layout_height="59dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
@@ -59,5 +66,51 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="92dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="#4CAF50"
+        android:text="Learn"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/orbitron"
+        android:text="Rank:"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/orbitron"
+        android:text="Progress:"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar2"
+        app:layout_constraintStart_toStartOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/orbitron"
+        android:text="@string/UserRank"
+        android:textColor="#673AB7"
+        android:textSize="20sp"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
