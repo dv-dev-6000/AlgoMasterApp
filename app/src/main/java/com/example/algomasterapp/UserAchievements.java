@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,9 +72,24 @@ public class UserAchievements extends AppCompatActivity {
 
     private void fillAchievementsList() {
 
-        achievementsList.add(new Achievement("Getting Started!", "Start your first lesson", true, "stack"));
-        achievementsList.add(new Achievement("Level 2!", "Reached Level 2", false, "stack"));
-        achievementsList.add(new Achievement("3 Day Streak!", "Logged in 3 days in a row", false, "stack"));
+        // use a global list or info from db
+        achievementsList.add(new Achievement("A1", "Text Description", true, "stack"));
+        achievementsList.add(new Achievement("A2", "Text Description", false, "stack"));
+        achievementsList.add(new Achievement("A3", "Text Description", false, "stack"));
+        achievementsList.add(new Achievement("A4", "Text Description", true, "stack"));
+        achievementsList.add(new Achievement("A5", "Text Description", false, "stack"));
+        achievementsList.add(new Achievement("A6", "Text Description", false, "stack"));
+        achievementsList.add(new Achievement("A7", "Text Description", true, "stack"));
+        achievementsList.add(new Achievement("A8", "Text Description", false, "stack"));
+        achievementsList.add(new Achievement("A9", "Text Description", false, "stack"));
+        achievementsList.add(new Achievement("A10", "Text Description", true, "stack"));
+        achievementsList.add(new Achievement("A11", "Text Description", false, "stack"));
+        achievementsList.add(new Achievement("A12", "Text Description", false, "stack"));
+        achievementsList.add(new Achievement("A13", "Text Description", true, "stack"));
+        achievementsList.add(new Achievement("A14", "Text Description", false, "stack"));
+        achievementsList.add(new Achievement("A15", "Text Description", false, "stack"));
 
+        Toast toast = Toast.makeText(UserAchievements.this, "Hello!", Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

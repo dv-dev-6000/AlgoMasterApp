@@ -2,14 +2,28 @@ package com.example.algomasterapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Lessons extends AppCompatActivity {
+
+    String module = "";
+
+    private RecyclerView lessonRecView;
+    private RecyclerView.Adapter lessonAdapter;
+    private RecyclerView.LayoutManager lessonLayoutMan;
+
+    List<LessonItem> lessonList = new ArrayList<LessonItem>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +33,24 @@ public class Lessons extends AppCompatActivity {
         // set toolbar as action bar
         Toolbar toolbar = findViewById(R.id.toolbar_Lessons);
         setSupportActionBar(toolbar);
+
+        // get current module
+        Intent intent = getIntent();
+        module = intent.getStringExtra("module");
+
+        // fill up the revision item list
+        fillLessonList();
+
+        // Set up Rev Feed Recycler View
+        lessonRecView = (RecyclerView) findViewById(R.id.recView_lessons);
+        lessonRecView.setHasFixedSize(true);
+
+        lessonLayoutMan = new LinearLayoutManager(this);
+        lessonRecView.setLayoutManager(lessonLayoutMan);
+
+        lessonAdapter = new RecViewAdapter_Lessons(lessonList, Lessons.this);
+        lessonRecView.setAdapter(lessonAdapter);
+
     }
 
     // bind the menu to the actionbar
@@ -43,5 +75,35 @@ public class Lessons extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void fillLessonList() {
+
+        // find which module has been selected and load lessons.
+        switch (module){
+            case "m1":
+                lessonList.add(new LessonItem(1, "DataStructs 1", "Basics"));
+                lessonList.add(new LessonItem(1, "DataStructs 2", "Next Steps"));
+                lessonList.add(new LessonItem(1, "DataStructs 3", "Moving On"));
+                break;
+            case "m2":
+                lessonList.add(new LessonItem(1, "Algos 1", "Basics"));
+                lessonList.add(new LessonItem(1, "Algos 2", "Next Steps"));
+                lessonList.add(new LessonItem(1, "Algos 3", "Moving On"));
+                break;
+            case "m3":
+                lessonList.add(new LessonItem(1, "Advanced 1", "Basics"));
+                lessonList.add(new LessonItem(1, "Advanced 2", "Next Steps"));
+                lessonList.add(new LessonItem(1, "Advanced 3", "Moving On"));
+                break;
+            default:
+
+                break;
+        }
+
+        lessonList.get(0).setComplete(true);
+
+        Toast toast = Toast.makeText(Lessons.this, module, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

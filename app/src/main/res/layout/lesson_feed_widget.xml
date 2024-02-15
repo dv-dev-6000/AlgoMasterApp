@@ -2,18 +2,17 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/RevFeedLayout_TextImage"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#D5D5D5">
+    android:background="@color/material_dynamic_neutral90">
 
     <TextView
-        android:id="@+id/textView_RevFeedImage_Title"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:id="@+id/textView_lessonheading"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:fontFamily="@font/orbitron"
-        android:text="TextView"
+        android:text="Lesson Heading"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,35 +20,35 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView_RevFeedImage_Main"
+        android:id="@+id/textView_lessonDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
-        android:text="@string/test"
+        android:text="Lesson Description"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/RevFeed_Image" />
-
-    <ImageView
-        android:id="@+id/RevFeed_Image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_RevFeedImage_Title" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_Lesson_Check" />
 
     <View
-        android:id="@+id/divider2"
-        android:layout_width="0dp"
+        android:id="@+id/divider3"
+        android:layout_width="409dp"
         android:layout_height="15dp"
         android:layout_marginTop="25dp"
         android:background="@color/design_default_color_background"
+        app:layout_constraintTop_toBottomOf="@+id/textView_lessonDesc"
+        tools:layout_editor_absoluteX="1dp" />
+
+    <ImageView
+        android:id="@+id/imageView_Lesson_Check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_RevFeedImage_Main" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_lessonheading"
+        app:srcCompat="@drawable/baseline_check_circle_24" />
 </androidx.constraintlayout.widget.ConstraintLayout>

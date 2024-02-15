@@ -32,7 +32,7 @@
         app:srcCompat="@color/material_dynamic_neutral90" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_m1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -92,7 +92,7 @@
         app:srcCompat="@color/material_dynamic_neutral90" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_m2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -152,7 +152,7 @@
         app:srcCompat="@color/material_dynamic_neutral90" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_m3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"

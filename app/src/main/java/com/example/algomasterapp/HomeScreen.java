@@ -10,12 +10,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeScreen extends AppCompatActivity {
 
+    private Button learnButton;
     private RecyclerView revFeedRecView;
     private RecyclerView.Adapter revFeedAdapter;
     private RecyclerView.LayoutManager revFeedLayoutMan;
@@ -33,6 +36,16 @@ public class HomeScreen extends AppCompatActivity {
         // set toolbar as action bar
         Toolbar toolbar = findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
+
+        learnButton = findViewById(R.id.button_Learn);
+        learnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // do stuff
+                Intent intent = new Intent(HomeScreen.this, Modules.class);
+                startActivity(intent);
+            }
+        });
 
         // Set up Rev Feed Recycler View
         revFeedRecView = (RecyclerView) findViewById(R.id.RecView_RevisionFeed);

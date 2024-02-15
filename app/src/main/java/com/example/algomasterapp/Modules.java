@@ -8,8 +8,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class Modules extends AppCompatActivity {
+
+    private Button mod1;
+    private Button mod2;
+    private Button mod3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +25,39 @@ public class Modules extends AppCompatActivity {
         // set toolbar as action bar
         Toolbar toolbar = findViewById(R.id.toolbar_Modules);
         setSupportActionBar(toolbar);
+
+        mod1 = findViewById(R.id.button_m1);
+        mod1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // do stuff
+                Intent intent = new Intent(Modules.this, Lessons.class);
+                intent.putExtra("module", "m1");
+                startActivity(intent);
+            }
+        });
+
+        mod2 = findViewById(R.id.button_m2);
+        mod2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // do stuff
+                Intent intent = new Intent(Modules.this, Lessons.class);
+                intent.putExtra("module", "m2");
+                startActivity(intent);
+            }
+        });
+
+        mod3 = findViewById(R.id.button_m3);
+        mod3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // do stuff
+                Intent intent = new Intent(Modules.this, Lessons.class);
+                intent.putExtra("module", "m3");
+                startActivity(intent);
+            }
+        });
     }
 
     // bind the menu to the actionbar
