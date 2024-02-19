@@ -12,12 +12,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeScreen extends AppCompatActivity {
 
+    DatabaseHelper dbHelper;
     private Button learnButton;
     private RecyclerView revFeedRecView;
     private RecyclerView.Adapter revFeedAdapter;
@@ -29,6 +31,9 @@ public class HomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
+
+        // create Local Database instance
+        InitialDBSetup();
 
         // fill up the revision item list
         fillRevItemList();
@@ -95,5 +100,31 @@ public class HomeScreen extends AppCompatActivity {
         revItemList.add(test4);
         revItemList.add(test5);
         revItemList.add(test6);
+    }
+
+    private void InitialDBSetup() {
+
+        dbHelper = new DatabaseHelper(HomeScreen.this);
+
+        if (dbHelper.Get_IsEmpty("ACHIEVEMENT_PROGRESS")){
+            Toast toast = Toast.makeText(HomeScreen.this, "Achievement Empty", Toast.LENGTH_SHORT);
+            toast.show();
+
+            if (dbHelper.addAchievements()){
+                toast = Toast.makeText(HomeScreen.this, "Update Success", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
+
+        if (dbHelper.Get_IsEmpty("LESSON_PROGRESS")){
+            Toast toast = Toast.makeText(HomeScreen.this, "Lessons Empty", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        if (dbHelper.Get_IsEmpty("GENERAL_STATS")){
+            Toast toast = Toast.makeText(HomeScreen.this, "Stats Empty", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
     }
 }
