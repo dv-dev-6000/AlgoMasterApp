@@ -72,24 +72,9 @@ public class UserAchievements extends AppCompatActivity {
 
     private void fillAchievementsList() {
 
-        // use a global list or info from db
-        achievementsList.add(new Achievement("A1", "Text Description", true, "stack"));
-        achievementsList.add(new Achievement("A2", "Text Description", false, "stack"));
-        achievementsList.add(new Achievement("A3", "Text Description", false, "stack"));
-        achievementsList.add(new Achievement("A4", "Text Description", true, "stack"));
-        achievementsList.add(new Achievement("A5", "Text Description", false, "stack"));
-        achievementsList.add(new Achievement("A6", "Text Description", false, "stack"));
-        achievementsList.add(new Achievement("A7", "Text Description", true, "stack"));
-        achievementsList.add(new Achievement("A8", "Text Description", false, "stack"));
-        achievementsList.add(new Achievement("A9", "Text Description", false, "stack"));
-        achievementsList.add(new Achievement("A10", "Text Description", true, "stack"));
-        achievementsList.add(new Achievement("A11", "Text Description", false, "stack"));
-        achievementsList.add(new Achievement("A12", "Text Description", false, "stack"));
-        achievementsList.add(new Achievement("A13", "Text Description", true, "stack"));
-        achievementsList.add(new Achievement("A14", "Text Description", false, "stack"));
-        achievementsList.add(new Achievement("A15", "Text Description", false, "stack"));
+        DatabaseHelper dbHelper = new DatabaseHelper(UserAchievements.this);
 
-        Toast toast = Toast.makeText(UserAchievements.this, "Hello!", Toast.LENGTH_SHORT);
-        toast.show();
+        achievementsList = dbHelper.getAchievements();
+
     }
 }

@@ -5,13 +5,13 @@ public class Achievement {
     private String title;
     private String desc;
     private Boolean active;
-    private String imageID;
+    //private String imageID;
 
-    public Achievement(String title, String desc, Boolean active, String imageID) {
+    public Achievement(String title, String desc, Boolean active) {
         this.title = title;
         this.desc = desc;
         this.active = active;
-        this.imageID = imageID;
+        //this.imageID = imageID;
 
     }
 
@@ -27,8 +27,8 @@ public class Achievement {
         return active;
     }
 
-    public String getImageID() {
-        return imageID;
-    }
+    //public String getImageID() {
+    //    return imageID;
+    //}
 
 }

@@ -24,14 +24,14 @@ public class RecViewAdapter_Achievements extends RecyclerView.Adapter<RecViewAda
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tv_Title;
         TextView tv_Desc;
-        ImageView iv_Image;
+        //ImageView iv_Image;
         ImageView iv_Check;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_Title = itemView.findViewById(R.id.textView_Achievement_Title);
             tv_Desc = itemView.findViewById(R.id.textView_Achievment_Main);
-            iv_Image = itemView.findViewById(R.id.imageView_Achievement_Image);
+            //iv_Image = itemView.findViewById(R.id.imageView_Achievement_Image);
             iv_Check = itemView.findViewById(R.id.imageView_Achievement_check);
         }
     }
@@ -56,18 +56,18 @@ public class RecViewAdapter_Achievements extends RecyclerView.Adapter<RecViewAda
             //activate checkmark
             holder.iv_Check.setVisibility(View.VISIBLE);
             //set image
-            String mDrawableName = AchievementItems.get(position).getImageID();
-            int resID = context.getResources().getIdentifier(mDrawableName, "drawable", context.getPackageName());
-            holder.iv_Image.setImageResource(resID);
+            //String mDrawableName = AchievementItems.get(position).getImageID();
+            //int resID = context.getResources().getIdentifier(mDrawableName, "drawable", context.getPackageName());
+            //holder.iv_Image.setImageResource(resID);
         }
         else
         {
             //activate checkmark
             holder.iv_Check.setVisibility(View.INVISIBLE);
             //set image
-            String mDrawableName = "test";
-            int resID = context.getResources().getIdentifier(mDrawableName, "drawable", context.getPackageName());
-            holder.iv_Image.setImageResource(resID);
+            //String mDrawableName = "test";
+            //int resID = context.getResources().getIdentifier(mDrawableName, "drawable", context.getPackageName());
+            //holder.iv_Image.setImageResource(resID);
         }
 
     }

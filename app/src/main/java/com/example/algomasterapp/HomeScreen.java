@@ -46,6 +46,9 @@ public class HomeScreen extends AppCompatActivity {
         learnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                dbHelper.AchievementEarned(0, HomeScreen.this );
+
                 // do stuff
                 Intent intent = new Intent(HomeScreen.this, Modules.class);
                 startActivity(intent);
@@ -107,7 +110,7 @@ public class HomeScreen extends AppCompatActivity {
         dbHelper = new DatabaseHelper(HomeScreen.this);
 
         if (dbHelper.Get_IsEmpty("ACHIEVEMENT_PROGRESS")){
-            Toast toast = Toast.makeText(HomeScreen.this, "Achievement Empty", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(HomeScreen.this, "Loading Achievements", Toast.LENGTH_SHORT);
             toast.show();
 
             if (dbHelper.addAchievements()){
@@ -117,8 +120,13 @@ public class HomeScreen extends AppCompatActivity {
         }
 
         if (dbHelper.Get_IsEmpty("LESSON_PROGRESS")){
-            Toast toast = Toast.makeText(HomeScreen.this, "Lessons Empty", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(HomeScreen.this, "Loading Lessons", Toast.LENGTH_SHORT);
             toast.show();
+
+            if (dbHelper.addLessons()){
+                toast = Toast.makeText(HomeScreen.this, "Update Success", Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
 
         if (dbHelper.Get_IsEmpty("GENERAL_STATS")){

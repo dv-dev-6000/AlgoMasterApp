@@ -6,43 +6,45 @@ public class LessonItem {
     private String title;
     private String description;
     private boolean isComplete;
+    private int clickedCount;
+    private int quizMax;
+    private int quizScore;
 
-    public LessonItem(int id, String title, String description) {
+    public LessonItem(int id, int clickedCount, boolean isComplete, String title, String description, int quizMax, int quizScore) {
         this.id = id;
+        this.clickedCount = clickedCount;
+        this.isComplete = isComplete;
         this.title = title;
         this.description = description;
-        this.isComplete = false;
+        this.quizMax = quizMax;
+        this.quizScore = quizScore;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public boolean getIsComplete() {
         return isComplete;
     }
 
-    public void setComplete(boolean complete) {
-        isComplete = complete;
+    public int getClickedCount() {
+        return clickedCount;
+    }
+
+    public int getQuizMax() {
+        return quizMax;
+    }
+
+    public int getQuizScore() {
+        return quizScore;
     }
 }

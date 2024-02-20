@@ -79,31 +79,23 @@ public class Lessons extends AppCompatActivity {
 
     private void fillLessonList() {
 
+        DatabaseHelper dbHelper = new DatabaseHelper(Lessons.this);
+
         // find which module has been selected and load lessons.
         switch (module){
             case "m1":
-                lessonList.add(new LessonItem(1, "DataStructs 1", "Basics"));
-                lessonList.add(new LessonItem(1, "DataStructs 2", "Next Steps"));
-                lessonList.add(new LessonItem(1, "DataStructs 3", "Moving On"));
+                lessonList = dbHelper.getLessons(1);
                 break;
             case "m2":
-                lessonList.add(new LessonItem(1, "Algos 1", "Basics"));
-                lessonList.add(new LessonItem(1, "Algos 2", "Next Steps"));
-                lessonList.add(new LessonItem(1, "Algos 3", "Moving On"));
+                lessonList = dbHelper.getLessons(2);
                 break;
             case "m3":
-                lessonList.add(new LessonItem(1, "Advanced 1", "Basics"));
-                lessonList.add(new LessonItem(1, "Advanced 2", "Next Steps"));
-                lessonList.add(new LessonItem(1, "Advanced 3", "Moving On"));
+                lessonList = dbHelper.getLessons(3);
                 break;
             default:
-
+                lessonList = dbHelper.getLessons(0);
                 break;
         }
 
-        lessonList.get(0).setComplete(true);
-
-        Toast toast = Toast.makeText(Lessons.this, module, Toast.LENGTH_SHORT);
-        toast.show();
     }
 }

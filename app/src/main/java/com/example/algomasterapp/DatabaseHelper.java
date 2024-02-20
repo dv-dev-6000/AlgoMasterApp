@@ -2,6 +2,7 @@ package com.example.algomasterapp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -14,7 +15,9 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+
     private List<Achievement> initialAchievements = new ArrayList<Achievement>();
+    private List<LessonItem> initialLessons = new ArrayList<LessonItem>();
 
     //region Constant Vars
     // LESSON TABLE CONSTANTS
@@ -22,6 +25,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COLUMN_LESSON_ID = "LESSON_ID";
     public static final String COLUMN_LESSON_CLICKED = "LESSON_CLICKED";
     public static final String COLUMN_LESSON_COMPLETE = "LESSON_COMPLETE";
+    public static final String COLUMN_LESSON_TITLE = "LESSON_TITLE";
+    public static final String COLUMN_LESSON_DESC = "LESSON_DESC";
+    public static final String COLUMN_QUIZ_MAX = "QUIZ_MAX";
     public static final String COLUMN_QUIZ_SCORE = "QUIZ_SCORE";
     // ACHIEVEMENT TABLE CONSTANTS
     public static final String ACHIEVEMENT_PROGRESS = "ACHIEVEMENT_PROGRESS";
@@ -50,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String createTableLesson = "CREATE TABLE " + LESSON_PROGRESS + " (" + COLUMN_LESSON_ID + " INTEGER PRIMARY KEY, " + COLUMN_LESSON_CLICKED + " INTEGER, " + COLUMN_LESSON_COMPLETE + " BOOL, " + COLUMN_QUIZ_SCORE + " INTEGER)";
+        String createTableLesson = "CREATE TABLE " + LESSON_PROGRESS + " (" + COLUMN_LESSON_ID + " INTEGER PRIMARY KEY, " + COLUMN_LESSON_CLICKED + " INTEGER, " + COLUMN_LESSON_COMPLETE + " BOOL, " + COLUMN_LESSON_TITLE + " TEXT, " + COLUMN_LESSON_DESC + " TEXT, " + COLUMN_QUIZ_MAX + " INTEGER, " + COLUMN_QUIZ_SCORE + " INTEGER)";
         String createTableAchievements = "CREATE TABLE " + ACHIEVEMENT_PROGRESS + " (" + COLUMN_ACHIEVEMENT_ID + " INTEGER PRIMARY KEY, " + COLUMN_ACHIEVEMENT_ACTIVE + " BOOL, " + COLUMN_ACHIEVEMENT_TITLE + " TEXT, " + COLUMN_ACHIEVEMENT_DESC + " TEXT)";
         String createTableGeneral = "CREATE TABLE " + GENERAL_STATS + " (" + COLUMN_USER_ID + " INTEGER PRIMARY KEY, " + COLUMN_CURRENT_LEVEL + " INTEGER, " + COLUMN_LESSONS_COMPLETE + " INTEGER, " + COLUMN_LESSONS_PERFECT + " INTEGER, " + COLUMN_ACHIEVEMENTS_VIEWED + " INTEGER, " + COLUMN_ACHIEVEMENTS_GAINED + " INTEGER, " + COLUMN_TOTAL_LOGINS + " INTEGER, " + COLUMN_LAST_LOGIN + " INTEGER, " + COLUMN_CURRENT_STREAK + " INTEGER)";
 
@@ -64,6 +70,182 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    // checks to see id a named table is empty
+    public boolean Get_IsEmpty(String tableName){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        long rowCount = DatabaseUtils.queryNumEntries(db, tableName);
+        db.close();
+        return rowCount <= 0;
+    }
+
+    //region Lesson Related ------------------------------------------------------------------------
+    //
+    public List<LessonItem> getLessons(int module){
+
+        List<LessonItem> dbList = new ArrayList<LessonItem>();
+
+        // get data from database based on module
+        String qString;
+        switch (module){
+            case 0:
+                qString = "SELECT * FROM " + LESSON_PROGRESS;
+                break;
+            case 1:
+                qString = "SELECT * FROM " + LESSON_PROGRESS + " WHERE " + COLUMN_LESSON_ID + " < 6";
+                break;
+            case 2:
+                qString = "SELECT * FROM " + LESSON_PROGRESS + " WHERE " + COLUMN_LESSON_ID + " > 5 AND " + COLUMN_LESSON_ID + " < 12";
+                break;
+            case 3:
+                qString = "SELECT * FROM " + LESSON_PROGRESS + " WHERE " + COLUMN_LESSON_ID + " > 11";
+                break;
+            default:
+                qString = "SELECT * FROM " + LESSON_PROGRESS;
+                break;
+        }
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(qString, null);
+        if (cursor.moveToFirst()){
+            // loop through results, create new combatant, add to list
+            do{
+                int id = cursor.getInt(0);
+                int clicked = cursor.getInt(1);
+                boolean complete = cursor.getInt(2) > 0;
+                String title = cursor.getString(3);
+                String desc = cursor.getString(4);
+                int max = cursor.getInt(5);
+                int score = cursor.getInt(6);
+
+                LessonItem l = new LessonItem(id, clicked, complete, title, desc, max, score);
+                dbList.add(l);
+            } while (cursor.moveToNext());
+        }
+        else{
+            // no results
+        }
+        cursor.close();
+        db.close();
+
+        return dbList;
+    }
+
+    public boolean addLessons(){
+
+        // Variables
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        fillInitialLessons();
+        for (LessonItem item : initialLessons) {
+
+            cv.put(COLUMN_LESSON_ID, item.getId());
+            cv.put(COLUMN_LESSON_CLICKED, item.getClickedCount());
+            cv.put(COLUMN_LESSON_COMPLETE, item.getIsComplete());
+            cv.put(COLUMN_LESSON_TITLE, item.getTitle());
+            cv.put(COLUMN_LESSON_DESC, item.getDescription());
+            cv.put(COLUMN_QUIZ_MAX, item.getQuizMax());
+            cv.put(COLUMN_QUIZ_SCORE, item.getQuizScore());
+
+            db.insert(LESSON_PROGRESS, null, cv);
+        }
+
+        long rowCount = DatabaseUtils.queryNumEntries(db, LESSON_PROGRESS);
+
+        db.close();
+
+
+        return rowCount == initialAchievements.size();
+    }
+
+    private void fillInitialLessons() {
+
+        initialLessons.add(new LessonItem(0, 0, false, "DS Basics", "A beginners guide to data structures", 3, 0));
+        initialLessons.add(new LessonItem(1, 0, false, "Stack", "Introducing the stack data structure", 3, 0));
+        initialLessons.add(new LessonItem(2, 0, false, "Queue", "Introducing the queue data structure", 3, 0));
+        initialLessons.add(new LessonItem(3, 0, false, "Circular Queue", "Optimising the queue data structure", 3, 0));
+        initialLessons.add(new LessonItem(4, 0, false, "Linked List", "Introducing the linked list data structure", 3, 0));
+        initialLessons.add(new LessonItem(5, 0, false, "Use Cases", "Looking at the different use-cases for the various data structures", 3, 0));
+
+        initialLessons.add(new LessonItem(6, 0, false, "Algorithm Basics", "A beginners guide to Algorithms", 3, 0));
+        initialLessons.add(new LessonItem(7, 0, false, "Search: Linear Search", "Introducing the linear search algorithm", 3, 0));
+        initialLessons.add(new LessonItem(8, 0, false, "Search: Binary Search", "Introducing the binary search algorithm", 3, 0));
+        initialLessons.add(new LessonItem(9, 0, false, "Sorting 1: Bubble Sort", "Introducing the bubble sort algorithm", 3, 0));
+        initialLessons.add(new LessonItem(10, 0, false, "Sorting 2: Insertion Sort", "Introducing the insertion sort algorithm", 3, 0));
+        initialLessons.add(new LessonItem(11, 0, false, "Sorting 3: Selection Sort", "Introducing the selection sort algorithm", 3, 0));
+
+        initialLessons.add(new LessonItem(12, 0, false, "Algorithmic Complexity", "Advanced content", 3, 0));
+        initialLessons.add(new LessonItem(13, 0, false, "Graphs & Trees 1", "Advanced content", 3, 0));
+        initialLessons.add(new LessonItem(14, 0, false, "Graphs & Trees 2", "Advanced content", 3, 0));
+
+    }
+    //endregion ------------------------------------------------------------------------------------
+
+    //region Achievements Related ------------------------------------------------------------------
+    // activates an earned achievement in db
+    public void AchievementEarned(int id, Context context){
+
+        boolean isActive;
+        String name;
+        // Check value
+        String qString = "SELECT * FROM " + ACHIEVEMENT_PROGRESS + " WHERE " + COLUMN_ACHIEVEMENT_ID + " = " + id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(qString, null);
+        if (cursor.moveToFirst()){
+            isActive = cursor.getInt(1) > 0;
+            name = cursor.getString(2);
+        }
+        else{
+            isActive = false;
+            name = "Error";
+        }
+        cursor.close();
+        db.close();
+
+        if (!isActive){
+            // Update Value
+            db = this.getWritableDatabase();
+            db.execSQL("UPDATE " + ACHIEVEMENT_PROGRESS + " SET " + COLUMN_ACHIEVEMENT_ACTIVE + " = 1 WHERE " + COLUMN_ACHIEVEMENT_ID + " = " + id);
+
+            db.close();
+
+            String toastString = "Achievement Unlocked:\n" + name;
+            Toast toast = Toast.makeText(context, toastString, Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+    }
+
+    // gets list of achievements from db
+    public List<Achievement> getAchievements(){
+
+        List<Achievement> dbList = new ArrayList<Achievement>();
+
+        // get data from database
+        String qString = "SELECT * FROM " + ACHIEVEMENT_PROGRESS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(qString, null);
+        if (cursor.moveToFirst()){
+            // loop through results, create new combatant, add to list
+            do{
+                boolean active = cursor.getInt(1) > 0;
+                String title = cursor.getString(2);
+                String desc = cursor.getString(3);
+                Achievement a = new Achievement(title, desc, active);
+                dbList.add(a);
+            } while (cursor.moveToNext());
+        }
+        else{
+            // no results
+        }
+        cursor.close();
+        db.close();
+
+        return dbList;
+    }
+
+    // adds the achievement data to local db if none exists
     public boolean addAchievements(){
 
         // Variables
@@ -92,106 +274,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowCount == initialAchievements.size();
     }
 
-    public boolean Get_IsEmpty(String tableName){
-
-        SQLiteDatabase db = this.getWritableDatabase();
-        long rowCount = DatabaseUtils.queryNumEntries(db, tableName);
-        db.close();
-        return rowCount <= 0;
-    }
-
+    // data used by addAchievement function
     private void fillInitialAchievements() {
 
-        initialAchievements.add(new Achievement("Getting Started!", "Begin your first lesson.", false, "stack"));
-        initialAchievements.add(new Achievement("Level 2!", "Unlocked level 2: Algorithms", false, "stack"));
-        initialAchievements.add(new Achievement("Level 3!", "Unlocked level 3: Advanced", false, "stack"));
-        initialAchievements.add(new Achievement("DS Perfectionist!", "Get a perfect score on all data structures quiz's", false, "stack"));
-        initialAchievements.add(new Achievement("Algo Perfectionist!", "Get a perfect score on all algorithms quiz's", false, "stack"));
-        initialAchievements.add(new Achievement("Ultimate Perfection!", "Get a perfect score on all quiz's", false, "stack"));
-        initialAchievements.add(new Achievement("2 Day Streak!", "Log in two days consecutively", false, "stack"));
-        initialAchievements.add(new Achievement("3 Day Streak!", "Log in three days consecutively", false, "stack"));
-        initialAchievements.add(new Achievement("4 Day Streak!", "Log in four days consecutively", false, "stack"));
-        initialAchievements.add(new Achievement("5 Day Streak!", "Log in five days consecutively", false, "stack"));
-        initialAchievements.add(new Achievement("Studious!", "Revisit completed lessons", false, "stack"));
-        initialAchievements.add(new Achievement("Perseverance!", "Succeed in previously failed quiz", false, "stack"));
-        initialAchievements.add(new Achievement("Back in the Game!", "Log back in after over 24 hours away", false, "stack"));
-        initialAchievements.add(new Achievement("Proud Collector!", "You like view your achievements", false, "stack"));
-        initialAchievements.add(new Achievement("Secret!", "What?", false, "stack"));
+        initialAchievements.add(new Achievement("Getting Started!", "Begin your first lesson.", false));
+        initialAchievements.add(new Achievement("Level 2!", "Unlocked level 2: Algorithms", false));
+        initialAchievements.add(new Achievement("Level 3!", "Unlocked level 3: Advanced", false));
+        initialAchievements.add(new Achievement("DS Perfectionist!", "Get a perfect score on all data structures quiz's", false));
+        initialAchievements.add(new Achievement("Algo Perfectionist!", "Get a perfect score on all algorithms quiz's", false));
+        initialAchievements.add(new Achievement("Ultimate Perfection!", "Get a perfect score on all quiz's", false));
+        initialAchievements.add(new Achievement("2 Day Streak!", "Log in two days consecutively", false));
+        initialAchievements.add(new Achievement("3 Day Streak!", "Log in three days consecutively", false));
+        initialAchievements.add(new Achievement("4 Day Streak!", "Log in four days consecutively", false));
+        initialAchievements.add(new Achievement("5 Day Streak!", "Log in five days consecutively", false));
+        initialAchievements.add(new Achievement("Studious!", "Revisit completed lessons", false));
+        initialAchievements.add(new Achievement("Perseverance!", "Succeed in previously failed quiz", false));
+        initialAchievements.add(new Achievement("Back in the Game!", "Log back in after over 24 hours away", false));
+        initialAchievements.add(new Achievement("Proud Collector!", "You like view your achievements", false));
+        initialAchievements.add(new Achievement("Secret!", "What?", false));
 
     }
+    //endregion ------------------------------------------------------------------------------------
 
-    ///**
-    // * Save the given list of combatants into the database
-    // * @param cList - the list of combatants to save
-    // */
-    //public boolean addCombatantList(List<Combatant> cList){
-//
-    //    // Variables
-    //    long insert;
-    //    SQLiteDatabase db = this.getWritableDatabase();
-    //    ContentValues cv = new ContentValues();
-//
-    //    // cycles though the combatants in the list
-    //    // for each combatant, its data is entered ito the db
-    //    for (Combatant c: cList){
-//
-    //        cv.put(COL_ID, c.getId());
-    //        cv.put(COL_INITIATIVE, c.getM_ini());
-    //        cv.put(COL_HP, c.getM_hp());
-    //        cv.put(COL_HP_MAX, c.getM_hpMax());
-    //        cv.put(COL_NAME, c.getM_name());
-    //        cv.put(COL_CONDITION, c.getM_cond());
-    //        cv.put(COL_URL, c.getM_url());
-    //        cv.put(COL_AC, c.getM_ac());
-//
-//
-    //        insert = db.insert(COMBATANT_TABLE, null, cv);
-    //        if (insert == -1){
-    //            return false;
-    //        }
-    //    }
-//
-    //    db.close();
-    //    return true;
-    //}
-//
-    ///**
-    // * loads all combatants from the database and returns them as a list of combatants
-    // */
-    //public List<Combatant> loadCombatants(){
-//
-    //    // list to return
-    //    List<Combatant> returnList = new ArrayList<>();
-//
-    //    // get data from database
-    //    String qString = "SELECT * FROM " + COMBATANT_TABLE;
-    //    SQLiteDatabase db = this.getReadableDatabase();
-    //    Cursor cursor = db.rawQuery(qString, null);
-//
-    //    if (cursor.moveToFirst()){
-    //        // loop through results, create new combatant, add to list
-    //        do{
-    //            int id = cursor.getInt(0);
-    //            int ini = cursor.getInt(1);
-    //            int hp = cursor.getInt(2);
-    //            int hpMax = cursor.getInt(3);
-    //            String name = cursor.getString(4);
-    //            String con = cursor.getString(5);
-    //            String url = cursor.getString(6);
-    //            int ac = cursor.getInt(7);
-//
-    //            Combatant newCom = new Combatant(id, ini, hp, hpMax, name, con, url, ac);
-    //            returnList.add(newCom);
-//
-    //        } while (cursor.moveToNext());
-    //    }
-    //    else{
-    //        // no results
-    //    }
-//
-    //    cursor.close();
-    //    db.close();
-    //    return returnList;
-    //}
+
 
 }
