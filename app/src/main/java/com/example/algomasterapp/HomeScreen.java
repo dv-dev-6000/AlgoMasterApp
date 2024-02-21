@@ -14,18 +14,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeScreen extends AppCompatActivity {
 
     DatabaseHelper dbHelper;
+
     private Button learnButton;
     private RecyclerView revFeedRecView;
     private RecyclerView.Adapter revFeedAdapter;
     private RecyclerView.LayoutManager revFeedLayoutMan;
 
     List<RevisionItem> revItemList = new ArrayList<RevisionItem>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,7 @@ public class HomeScreen extends AppCompatActivity {
         revFeedAdapter = new RecViewAdapter_RevFeed(revItemList, HomeScreen.this);
         revFeedRecView.setAdapter(revFeedAdapter);
     }
+
 
     // bind the menu to the actionbar
     @Override
@@ -135,4 +139,5 @@ public class HomeScreen extends AppCompatActivity {
         }
 
     }
+
 }

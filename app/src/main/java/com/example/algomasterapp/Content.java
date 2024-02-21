@@ -8,8 +8,24 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.Objects;
 
 public class Content extends AppCompatActivity {
+
+    int lessonID;
+    private Button quizBut;
+    private TextView tv1;
+    private TextView tv2;
+    private TextView tv3;
+    private TextView tv4;
+    private ImageView iv1;
+    private ImageView iv2;
+    private ImageView iv3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +35,47 @@ public class Content extends AppCompatActivity {
         // set toolbar as action bar
         Toolbar toolbar = findViewById(R.id.toolbar_Content);
         setSupportActionBar(toolbar);
+
+        tv1 = findViewById(R.id.textView_Lesson1);
+        tv2 = findViewById(R.id.textView_Lesson2);
+        tv3 = findViewById(R.id.textView_Lesson3);
+        tv4 = findViewById(R.id.textView_Lesson4);
+
+        iv1 = findViewById(R.id.imageView_Lesson1);
+        iv2 = findViewById(R.id.imageView_Lesson2);
+        iv3 = findViewById(R.id.imageView_Lesson3);
+
+        quizBut = findViewById(R.id.button_LessonComplete);
+
+        // get current module
+        Intent intent = getIntent();
+        lessonID = intent.getIntExtra("id", 0);
+
+        getLessonContent(lessonID);
+    }
+
+    private void getLessonContent(int lessonID) {
+
+        CSV_Helper csvHelper = new CSV_Helper(getResources().openRawResource(R.raw.lessondata));
+        String[] currentLesson = csvHelper.GetLine(lessonID);
+
+        tv1.setText(currentLesson[0]);
+        setImage(iv1, currentLesson[1]);
+        tv2.setText(currentLesson[2]);
+        setImage(iv2, currentLesson[3]);
+        tv3.setText(currentLesson[4]);
+        setImage(iv3, currentLesson[5]);
+        tv4.setText(currentLesson[6]);
+    }
+
+    private void setImage(ImageView iv, String filename){
+
+        if (!Objects.equals(filename, "null")){
+            int resID = getResources().getIdentifier(filename, "drawable", getPackageName());;
+
+            iv.setImageResource(resID);
+        }
+
     }
 
     // bind the menu to the actionbar
