@@ -17,7 +17,7 @@ import java.util.List;
 
 public class Lessons extends AppCompatActivity {
 
-    String module = "";
+    private String module = "";
 
     private RecyclerView lessonRecView;
     private RecyclerView.Adapter lessonAdapter;

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -52,6 +53,15 @@ public class Content extends AppCompatActivity {
         lessonID = intent.getIntExtra("id", 0);
 
         getLessonContent(lessonID);
+
+        quizBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Content.this, Quiz.class);
+                intent.putExtra("lessonID", lessonID);
+                startActivity(intent);
+            }
+        });
     }
 
     private void getLessonContent(int lessonID) {
