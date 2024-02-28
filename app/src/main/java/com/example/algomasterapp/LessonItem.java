@@ -9,8 +9,9 @@ public class LessonItem {
     private int clickedCount;
     private int quizMax;
     private int quizScore;
+    private boolean isPerfect;
 
-    public LessonItem(int id, int clickedCount, boolean isComplete, String title, String description, int quizMax, int quizScore) {
+    public LessonItem(int id, int clickedCount, boolean isComplete, String title, String description, int quizMax, int quizScore, boolean isPerfect) {
         this.id = id;
         this.clickedCount = clickedCount;
         this.isComplete = isComplete;
@@ -18,6 +19,7 @@ public class LessonItem {
         this.description = description;
         this.quizMax = quizMax;
         this.quizScore = quizScore;
+        this.isPerfect = isPerfect;
     }
 
     public int getId() {
@@ -46,5 +48,9 @@ public class LessonItem {
 
     public int getQuizScore() {
         return quizScore;
+    }
+
+    public boolean isPerfect() {
+        return isPerfect;
     }
 }

@@ -41,16 +41,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_QuizQuestion" />
 
-    <Button
-        android:id="@+id/button_SubmitQuiz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Submit"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup_Quiz" />
-
     <TextView
         android:id="@+id/textViewA"
         android:layout_width="wrap_content"
@@ -105,24 +95,28 @@
             android:id="@+id/radioButtonA"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:tag="1"
             android:text="A" />
 
         <RadioButton
             android:id="@+id/radioButtonB"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:tag="2"
             android:text="B" />
 
         <RadioButton
             android:id="@+id/radioButtonC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:tag="3"
             android:text="C" />
 
         <RadioButton
             android:id="@+id/radioButtonD"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:tag="4"
             android:text="D" />
     </RadioGroup>
 
@@ -136,5 +130,5 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_SubmitQuiz" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup_Quiz" />
 </androidx.constraintlayout.widget.ConstraintLayout>

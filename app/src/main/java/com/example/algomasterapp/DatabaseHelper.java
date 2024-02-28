@@ -80,6 +80,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //region Lesson Related ------------------------------------------------------------------------
+    // register a lesson click
+    public void UpdateLessonClicked(int id){
+
+        // Update Value
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("UPDATE " + LESSON_PROGRESS + " SET " + COLUMN_LESSON_CLICKED + " = " + COLUMN_LESSON_CLICKED + " + 1 WHERE " + COLUMN_LESSON_ID + " = " + id);
+
+        db.close();
+
+    }
+
+    // register a new quiz score
+    public void UpdateQuizScore(int id, int newScore){
+
+        // get previous score
+        int prevScore;
+        String qString = "SELECT * FROM " + LESSON_PROGRESS + " WHERE " + COLUMN_LESSON_ID + " = " + id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(qString, null);
+        if (cursor.moveToFirst()){
+            prevScore = cursor.getInt(6);
+        }
+        else{
+            prevScore = 1; // error
+        }
+        cursor.close();
+        db.close();
+
+        // check new value is higher than previous
+        if (newScore > prevScore){
+            // Update Value
+            db = this.getWritableDatabase();
+            db.execSQL("UPDATE " + LESSON_PROGRESS + " SET " + COLUMN_QUIZ_SCORE + " = " + newScore + " WHERE " + COLUMN_LESSON_ID + " = " + id);
+
+            if (newScore > 1){
+                db.execSQL("UPDATE " + LESSON_PROGRESS + " SET " + COLUMN_LESSON_COMPLETE + " = TRUE WHERE " + COLUMN_LESSON_ID + " = " + id);
+            }
+        }
+        db.close();
+
+    }
+
     //
     public List<LessonItem> getLessons(int module){
 
@@ -118,7 +160,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int max = cursor.getInt(5);
                 int score = cursor.getInt(6);
 
-                LessonItem l = new LessonItem(id, clicked, complete, title, desc, max, score);
+                boolean perfect;
+                if (score == max){
+                    perfect = true;
+                }
+                else{perfect = false;}
+
+                LessonItem l = new LessonItem(id, clicked, complete, title, desc, max, score, perfect);
                 dbList.add(l);
             } while (cursor.moveToNext());
         }
@@ -161,23 +209,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void fillInitialLessons() {
 
-        initialLessons.add(new LessonItem(0, 0, false, "DS Basics", "A beginners guide to data structures", 3, 0));
-        initialLessons.add(new LessonItem(1, 0, false, "Stack", "Introducing the stack data structure", 3, 0));
-        initialLessons.add(new LessonItem(2, 0, false, "Queue", "Introducing the queue data structure", 3, 0));
-        initialLessons.add(new LessonItem(3, 0, false, "Circular Queue", "Optimising the queue data structure", 3, 0));
-        initialLessons.add(new LessonItem(4, 0, false, "Linked List", "Introducing the linked list data structure", 3, 0));
-        initialLessons.add(new LessonItem(5, 0, false, "Use Cases", "Looking at the different use-cases for the various data structures", 3, 0));
+        initialLessons.add(new LessonItem(0, 0, false, "DS Basics", "A beginners guide to data structures", 3, 0, false));
+        initialLessons.add(new LessonItem(1, 0, false, "Stack", "Introducing the stack data structure", 3, 0, false));
+        initialLessons.add(new LessonItem(2, 0, false, "Queue", "Introducing the queue data structure", 3, 0, false));
+        initialLessons.add(new LessonItem(3, 0, false, "Circular Queue", "Optimising the queue data structure", 3, 0, false));
+        initialLessons.add(new LessonItem(4, 0, false, "Linked List", "Introducing the linked list data structure", 3, 0, false));
+        initialLessons.add(new LessonItem(5, 0, false, "Use Cases", "Looking at the different use-cases for the various data structures", 3, 0, false));
 
-        initialLessons.add(new LessonItem(6, 0, false, "Algorithm Basics", "A beginners guide to Algorithms", 3, 0));
-        initialLessons.add(new LessonItem(7, 0, false, "Search: Linear Search", "Introducing the linear search algorithm", 3, 0));
-        initialLessons.add(new LessonItem(8, 0, false, "Search: Binary Search", "Introducing the binary search algorithm", 3, 0));
-        initialLessons.add(new LessonItem(9, 0, false, "Sorting 1: Bubble Sort", "Introducing the bubble sort algorithm", 3, 0));
-        initialLessons.add(new LessonItem(10, 0, false, "Sorting 2: Insertion Sort", "Introducing the insertion sort algorithm", 3, 0));
-        initialLessons.add(new LessonItem(11, 0, false, "Sorting 3: Selection Sort", "Introducing the selection sort algorithm", 3, 0));
+        initialLessons.add(new LessonItem(6, 0, false, "Algorithm Basics", "A beginners guide to Algorithms", 3, 0, false));
+        initialLessons.add(new LessonItem(7, 0, false, "Search: Linear Search", "Introducing the linear search algorithm", 3, 0, false));
+        initialLessons.add(new LessonItem(8, 0, false, "Search: Binary Search", "Introducing the binary search algorithm", 3, 0, false));
+        initialLessons.add(new LessonItem(9, 0, false, "Sorting 1: Bubble Sort", "Introducing the bubble sort algorithm", 3, 0, false));
+        initialLessons.add(new LessonItem(10, 0, false, "Sorting 2: Insertion Sort", "Introducing the insertion sort algorithm", 3, 0, false));
+        initialLessons.add(new LessonItem(11, 0, false, "Sorting 3: Selection Sort", "Introducing the selection sort algorithm", 3, 0, false));
 
-        initialLessons.add(new LessonItem(12, 0, false, "Algorithmic Complexity", "Advanced content", 3, 0));
-        initialLessons.add(new LessonItem(13, 0, false, "Graphs & Trees 1", "Advanced content", 3, 0));
-        initialLessons.add(new LessonItem(14, 0, false, "Graphs & Trees 2", "Advanced content", 3, 0));
+        initialLessons.add(new LessonItem(12, 0, false, "Algorithmic Complexity", "Advanced content", 3, 0, false));
+        initialLessons.add(new LessonItem(13, 0, false, "Graphs & Trees 1", "Advanced content", 3, 0, false));
+        initialLessons.add(new LessonItem(14, 0, false, "Graphs & Trees 2", "Advanced content", 3, 0, false));
 
     }
     //endregion ------------------------------------------------------------------------------------

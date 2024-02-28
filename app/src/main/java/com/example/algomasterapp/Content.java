@@ -17,6 +17,7 @@ import java.util.Objects;
 
 public class Content extends AppCompatActivity {
 
+    DatabaseHelper dbHelper = new DatabaseHelper(Content.this);
     int lessonID;
     private Button quizBut;
     private TextView tv1;
@@ -53,7 +54,7 @@ public class Content extends AppCompatActivity {
         lessonID = intent.getIntExtra("id", 0);
 
         getLessonContent(lessonID);
-
+        dbHelper.UpdateLessonClicked(lessonID);
         quizBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

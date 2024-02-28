@@ -1,16 +1,22 @@
 package com.example.algomasterapp;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,8 +24,17 @@ import java.util.List;
 
 public class RecViewAdapter_Quiz extends RecyclerView.Adapter<RecViewAdapter_Quiz.MyViewHolder> {
 
+    private RadioGroupClickListener radioGroupClickListener;
     List<QuizItem> questions;
     Context context;
+
+    public interface RadioGroupClickListener {
+        void onRadioGroupClick(int position, int checkedRadioButtonId);
+    }
+
+    public void setRadioGroupClickListener(RadioGroupClickListener listener) {
+        this.radioGroupClickListener = listener;
+    }
 
     public RecViewAdapter_Quiz(List<QuizItem> questionList, Context context) {
         this.questions = questionList;
@@ -36,7 +51,6 @@ public class RecViewAdapter_Quiz extends RecyclerView.Adapter<RecViewAdapter_Qui
         TextView tv_op3;
         TextView tv_op4;
         RadioGroup rad_Options;
-        Button bt_submit;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -48,7 +62,6 @@ public class RecViewAdapter_Quiz extends RecyclerView.Adapter<RecViewAdapter_Qui
             tv_op3 = itemView.findViewById(R.id.textViewC);
             tv_op4 = itemView.findViewById(R.id.textViewD);
             rad_Options = itemView.findViewById(R.id.radioGroup_Quiz);
-            bt_submit = itemView.findViewById(R.id.button_SubmitQuiz);
         }
     }
 
@@ -65,7 +78,6 @@ public class RecViewAdapter_Quiz extends RecyclerView.Adapter<RecViewAdapter_Qui
     @Override
     public void onBindViewHolder(@NonNull RecViewAdapter_Quiz.MyViewHolder holder, int position) {
 
-        float id = questions.get(position).getId();
 
         holder.tv_Title.setText(questions.get(position).getTitle());
         holder.tv_Question.setText(questions.get(position).getQuestion());
@@ -79,22 +91,17 @@ public class RecViewAdapter_Quiz extends RecyclerView.Adapter<RecViewAdapter_Qui
             holder.iv_Image.setImageResource(resID);
         }
 
-        holder.bt_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast toast = Toast.makeText(context, "ButtonPress", Toast.LENGTH_SHORT);
-                toast.show();
-
-                questions.remove(holder.getAdapterPosition());
-
-                notifyItemRemoved(holder.getAdapterPosition());
-                notifyItemRangeChanged(holder.getAdapterPosition(), questions.size()-holder.getAdapterPosition());
+        holder.rad_Options.setOnCheckedChangeListener((group, checkedId) -> {
+            if (radioGroupClickListener != null){
+                radioGroupClickListener.onRadioGroupClick(position, checkedId);
             }
         });
+
     }
 
     @Override
     public int getItemCount() {
         return questions.size();
     }
+
 }

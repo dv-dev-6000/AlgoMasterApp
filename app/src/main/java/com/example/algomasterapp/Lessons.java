@@ -38,7 +38,7 @@ public class Lessons extends AppCompatActivity {
         Intent intent = getIntent();
         module = intent.getStringExtra("module");
 
-        // fill up the revision item list
+        // fill up the lesson item list
         fillLessonList();
 
         // Set up Rev Feed Recycler View

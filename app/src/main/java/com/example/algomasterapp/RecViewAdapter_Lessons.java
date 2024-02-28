@@ -29,6 +29,7 @@ public class RecViewAdapter_Lessons extends RecyclerView.Adapter<RecViewAdapter_
         TextView tv_Desc;
         ImageView iv_Check;
         ConstraintLayout parentLayout;
+        TextView tv_Perfect;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -36,6 +37,7 @@ public class RecViewAdapter_Lessons extends RecyclerView.Adapter<RecViewAdapter_
             tv_Desc = itemView.findViewById(R.id.textView_lessonDesc);
             iv_Check = itemView.findViewById(R.id.imageView_Lesson_Check);
             parentLayout = itemView.findViewById(R.id.ConstraintLayout_Lesson);
+            tv_Perfect = itemView.findViewById(R.id.textView_perfect);
         }
     }
 
@@ -60,6 +62,12 @@ public class RecViewAdapter_Lessons extends RecyclerView.Adapter<RecViewAdapter_
         }
         else{
             holder.iv_Check.setVisibility(View.INVISIBLE);
+        }
+        if (lessons.get(position).isPerfect()){
+            holder.tv_Perfect.setVisibility(View.VISIBLE);
+        }
+        else{
+            holder.tv_Perfect.setVisibility(View.INVISIBLE);
         }
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
