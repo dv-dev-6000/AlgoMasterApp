@@ -67,6 +67,7 @@ public class HomeScreen extends AppCompatActivity {
 
         revFeedAdapter = new RecViewAdapter_RevFeed(revItemList, HomeScreen.this);
         revFeedRecView.setAdapter(revFeedAdapter);
+
     }
 
 
@@ -113,7 +114,7 @@ public class HomeScreen extends AppCompatActivity {
 
         dbHelper = new DatabaseHelper(HomeScreen.this);
 
-        if (dbHelper.Get_IsEmpty("ACHIEVEMENT_PROGRESS")){
+        if (dbHelper.Get_IsEmpty("ACHIEVEMENT_PROGRESS", -1)){
             Toast toast = Toast.makeText(HomeScreen.this, "Loading Achievements", Toast.LENGTH_SHORT);
             toast.show();
 
@@ -123,7 +124,7 @@ public class HomeScreen extends AppCompatActivity {
             }
         }
 
-        if (dbHelper.Get_IsEmpty("LESSON_PROGRESS")){
+        if (dbHelper.Get_IsEmpty("LESSON_PROGRESS", -1)){
             Toast toast = Toast.makeText(HomeScreen.this, "Loading Lessons", Toast.LENGTH_SHORT);
             toast.show();
 
@@ -133,9 +134,19 @@ public class HomeScreen extends AppCompatActivity {
             }
         }
 
-        if (dbHelper.Get_IsEmpty("GENERAL_STATS")){
+        // get user id from global space
+        if (dbHelper.Get_IsEmpty("GENERAL_STATS", 0)){
             Toast toast = Toast.makeText(HomeScreen.this, "Stats Empty", Toast.LENGTH_SHORT);
             toast.show();
+
+            if (dbHelper.addNewUserRecord(0)){
+                toast = Toast.makeText(HomeScreen.this, "Update Success", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        }
+        else{
+            // if a record exists for the user update db with a new login and log date then check for streak or 24 hr return
+
         }
 
     }

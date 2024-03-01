@@ -54,12 +54,13 @@
         app:layout_constraintStart_toStartOf="@+id/moduleBackOne" />
 
     <ProgressBar
-        android:id="@+id/progressBar3"
+        android:id="@+id/progressBar_mod1"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="15dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:progressTint="@android:color/holo_green_dark"
         app:layout_constraintBottom_toBottomOf="@+id/moduleBackOne"
         app:layout_constraintEnd_toEndOf="@+id/moduleBackOne"
         app:layout_constraintStart_toStartOf="@+id/moduleBackOne"
@@ -72,7 +73,7 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/orbitron"
         android:text="Lvl 1"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar3"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar_mod1"
         app:layout_constraintEnd_toEndOf="@+id/moduleBackOne"
         app:layout_constraintStart_toStartOf="@+id/moduleBackOne" />
 
@@ -114,12 +115,13 @@
         app:layout_constraintStart_toStartOf="@+id/moduleBackTwo" />
 
     <ProgressBar
-        android:id="@+id/progressBar4"
+        android:id="@+id/progressBar_mod2"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="15dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:progressTint="@android:color/holo_green_dark"
         app:layout_constraintBottom_toBottomOf="@+id/moduleBackTwo"
         app:layout_constraintEnd_toEndOf="@+id/moduleBackTwo"
         app:layout_constraintStart_toStartOf="@+id/moduleBackTwo"
@@ -132,7 +134,7 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/orbitron"
         android:text="Lvl 2"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar4"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar_mod2"
         app:layout_constraintEnd_toEndOf="@+id/moduleBackTwo"
         app:layout_constraintStart_toStartOf="@+id/moduleBackTwo" />
 
@@ -174,12 +176,13 @@
         app:layout_constraintStart_toStartOf="@+id/moduleBackThree" />
 
     <ProgressBar
-        android:id="@+id/progressBar5"
+        android:id="@+id/progressBar_mod3"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="15dp"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
+        android:progressTint="@android:color/holo_green_dark"
         app:layout_constraintBottom_toBottomOf="@+id/moduleBackThree"
         app:layout_constraintEnd_toEndOf="@+id/moduleBackThree"
         app:layout_constraintStart_toStartOf="@+id/moduleBackThree"
@@ -192,7 +195,7 @@
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/orbitron"
         android:text="Lvl 3"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar5"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar_mod3"
         app:layout_constraintEnd_toEndOf="@+id/moduleBackThree"
         app:layout_constraintStart_toStartOf="@+id/moduleBackThree" />
 

@@ -10,8 +10,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class UserProfile extends AppCompatActivity {
+
+    DatabaseHelper dbHelper = new DatabaseHelper(UserProfile.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,12 @@ public class UserProfile extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_profile);
         setSupportActionBar(toolbar);
 
+        // set up the total achievement counter
+        String achvText = Integer.toString(dbHelper.getEarnedAchievementTotal());
+        TextView tv_achvCount = findViewById(R.id.textView_ProfileAchieveCount);
+        tv_achvCount.setText(achvText);
+
+        // set up the view achievements button
         Button viewAchievementsButton = findViewById(R.id.button_viewAchievements);
         viewAchievementsButton.setOnClickListener(new View.OnClickListener() {
             @Override

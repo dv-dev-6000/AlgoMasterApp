@@ -53,8 +53,16 @@ public class Content extends AppCompatActivity {
         Intent intent = getIntent();
         lessonID = intent.getIntExtra("id", 0);
 
+        // check for studious achievement
+        if (dbHelper.isLessonComplete(lessonID)){
+            dbHelper.AchievementEarned(10, Content.this);
+        }
+
+        // get the lesson content
         getLessonContent(lessonID);
         dbHelper.UpdateLessonClicked(lessonID);
+
+        // set up quiz button
         quizBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

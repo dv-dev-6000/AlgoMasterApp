@@ -15,7 +15,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-
+    private TimeHelper timeHelper = new TimeHelper();
     private List<Achievement> initialAchievements = new ArrayList<Achievement>();
     private List<LessonItem> initialLessons = new ArrayList<LessonItem>();
 
@@ -71,15 +71,77 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // checks to see id a named table is empty
-    public boolean Get_IsEmpty(String tableName){
+    public boolean Get_IsEmpty(String tableName, int userID){
 
         SQLiteDatabase db = this.getWritableDatabase();
-        long rowCount = DatabaseUtils.queryNumEntries(db, tableName);
+        long rowCount;
+        if (userID > -1){
+            rowCount = DatabaseUtils.queryNumEntries(db, tableName, COLUMN_USER_ID + " = " + userID);
+        }
+        else{
+            rowCount = DatabaseUtils.queryNumEntries(db, tableName);
+        }
+
         db.close();
         return rowCount <= 0;
     }
 
+    //region General Stats Related ------------------------------------------------------------------------
+
+    // add new user record
+    public boolean addNewUserRecord(int userID){
+
+        long time = timeHelper.GetCurrentUnixTime();
+
+        // Variables
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        long rowCountOld = DatabaseUtils.queryNumEntries(db, GENERAL_STATS);
+
+        cv.put(COLUMN_USER_ID, userID);
+        cv.put(COLUMN_CURRENT_LEVEL, 0);
+        cv.put(COLUMN_LESSONS_COMPLETE, 0);
+        cv.put(COLUMN_LESSONS_PERFECT, 0);
+        cv.put(COLUMN_ACHIEVEMENTS_VIEWED, 0);
+        cv.put(COLUMN_ACHIEVEMENTS_GAINED, 0);
+        cv.put(COLUMN_TOTAL_LOGINS, 1);
+        cv.put(COLUMN_LAST_LOGIN, time);
+        cv.put(COLUMN_CURRENT_STREAK, 0);
+
+        db.insert(GENERAL_STATS, null, cv);
+
+        long rowCountNew = DatabaseUtils.queryNumEntries(db, GENERAL_STATS);
+
+        db.close();
+
+        return (rowCountNew - rowCountOld) == 1;
+    }
+
+    //end region------------------------------------------------------------------------
+
     //region Lesson Related ------------------------------------------------------------------------
+
+    // check if lesson complete
+    public Boolean isLessonComplete(int id){
+
+        boolean returnMe = false;
+
+        // get Value
+        String qString = "SELECT * FROM " + LESSON_PROGRESS + " WHERE " + COLUMN_LESSON_ID + " = " + id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(qString, null);
+        if (cursor.moveToFirst()){
+            if (cursor.getInt(6) > 1){
+                returnMe = true;
+            }
+        }
+        cursor.close();
+        db.close();
+
+        return returnMe;
+    }
+
     // register a lesson click
     public void UpdateLessonClicked(int id){
 
@@ -92,7 +154,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // register a new quiz score
-    public void UpdateQuizScore(int id, int newScore){
+    public void UpdateQuizScore(int id, int newScore, Context context){
 
         // get previous score
         int prevScore;
@@ -114,8 +176,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db = this.getWritableDatabase();
             db.execSQL("UPDATE " + LESSON_PROGRESS + " SET " + COLUMN_QUIZ_SCORE + " = " + newScore + " WHERE " + COLUMN_LESSON_ID + " = " + id);
 
+            // if lesson passed update db
             if (newScore > 1){
                 db.execSQL("UPDATE " + LESSON_PROGRESS + " SET " + COLUMN_LESSON_COMPLETE + " = TRUE WHERE " + COLUMN_LESSON_ID + " = " + id);
+
+                //if lesson triggers perseverance achievement
+                if (prevScore > -1){
+                    db.close();
+                    AchievementEarned(11, context);
+                }
             }
         }
         db.close();
@@ -203,29 +272,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.close();
 
-
         return rowCount == initialAchievements.size();
     }
 
     private void fillInitialLessons() {
 
-        initialLessons.add(new LessonItem(0, 0, false, "DS Basics", "A beginners guide to data structures", 3, 0, false));
-        initialLessons.add(new LessonItem(1, 0, false, "Stack", "Introducing the stack data structure", 3, 0, false));
-        initialLessons.add(new LessonItem(2, 0, false, "Queue", "Introducing the queue data structure", 3, 0, false));
-        initialLessons.add(new LessonItem(3, 0, false, "Circular Queue", "Optimising the queue data structure", 3, 0, false));
-        initialLessons.add(new LessonItem(4, 0, false, "Linked List", "Introducing the linked list data structure", 3, 0, false));
-        initialLessons.add(new LessonItem(5, 0, false, "Use Cases", "Looking at the different use-cases for the various data structures", 3, 0, false));
+        initialLessons.add(new LessonItem(0, 0, false, "DS Basics", "A beginners guide to data structures", 3, -1, false));
+        initialLessons.add(new LessonItem(1, 0, false, "Stack", "Introducing the stack data structure", 3, -1, false));
+        initialLessons.add(new LessonItem(2, 0, false, "Queue", "Introducing the queue data structure", 3, -1, false));
+        initialLessons.add(new LessonItem(3, 0, false, "Circular Queue", "Optimising the queue data structure", 3, -1, false));
+        initialLessons.add(new LessonItem(4, 0, false, "Linked List", "Introducing the linked list data structure", 3, -1, false));
+        initialLessons.add(new LessonItem(5, 0, false, "Use Cases", "Looking at the different use-cases for the various data structures", 3, -1, false));
 
-        initialLessons.add(new LessonItem(6, 0, false, "Algorithm Basics", "A beginners guide to Algorithms", 3, 0, false));
-        initialLessons.add(new LessonItem(7, 0, false, "Search: Linear Search", "Introducing the linear search algorithm", 3, 0, false));
-        initialLessons.add(new LessonItem(8, 0, false, "Search: Binary Search", "Introducing the binary search algorithm", 3, 0, false));
-        initialLessons.add(new LessonItem(9, 0, false, "Sorting 1: Bubble Sort", "Introducing the bubble sort algorithm", 3, 0, false));
-        initialLessons.add(new LessonItem(10, 0, false, "Sorting 2: Insertion Sort", "Introducing the insertion sort algorithm", 3, 0, false));
-        initialLessons.add(new LessonItem(11, 0, false, "Sorting 3: Selection Sort", "Introducing the selection sort algorithm", 3, 0, false));
+        initialLessons.add(new LessonItem(6, 0, false, "Algorithm Basics", "A beginners guide to Algorithms", 3, -1, false));
+        initialLessons.add(new LessonItem(7, 0, false, "Search: Linear Search", "Introducing the linear search algorithm", 3, -1, false));
+        initialLessons.add(new LessonItem(8, 0, false, "Search: Binary Search", "Introducing the binary search algorithm", 3, -1, false));
+        initialLessons.add(new LessonItem(9, 0, false, "Sorting 1: Bubble Sort", "Introducing the bubble sort algorithm", 3, -1, false));
+        initialLessons.add(new LessonItem(10, 0, false, "Sorting 2: Insertion Sort", "Introducing the insertion sort algorithm", 3, -1, false));
+        initialLessons.add(new LessonItem(11, 0, false, "Sorting 3: Selection Sort", "Introducing the selection sort algorithm", 3, -1, false));
 
-        initialLessons.add(new LessonItem(12, 0, false, "Algorithmic Complexity", "Advanced content", 3, 0, false));
-        initialLessons.add(new LessonItem(13, 0, false, "Graphs & Trees 1", "Advanced content", 3, 0, false));
-        initialLessons.add(new LessonItem(14, 0, false, "Graphs & Trees 2", "Advanced content", 3, 0, false));
+        initialLessons.add(new LessonItem(12, 0, false, "Algorithmic Complexity", "Advanced content", 3, -1, false));
+        initialLessons.add(new LessonItem(13, 0, false, "Graphs & Trees 1", "Advanced content", 3, -1, false));
+        initialLessons.add(new LessonItem(14, 0, false, "Graphs & Trees 2", "Advanced content", 3, -1, false));
 
     }
     //endregion ------------------------------------------------------------------------------------
@@ -263,6 +331,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             toast.show();
         }
 
+    }
+
+    // gets number of achievements earned
+    public int getEarnedAchievementTotal(){
+
+        int returnMe;
+
+        // get data from database
+        String qString = "SELECT * FROM " + ACHIEVEMENT_PROGRESS + " WHERE " + COLUMN_ACHIEVEMENT_ACTIVE + " = TRUE";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(qString, null);
+        returnMe = cursor.getCount();
+        cursor.close();
+        db.close();
+
+        return returnMe;
     }
 
     // gets list of achievements from db

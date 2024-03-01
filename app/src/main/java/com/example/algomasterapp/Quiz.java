@@ -91,7 +91,7 @@ public class Quiz extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
 
                         // Update DB
-                        dbHelper.UpdateQuizScore(lesson, finalScore);
+                        dbHelper.UpdateQuizScore(lesson, finalScore, Quiz.this);
 
                         // back to modules
                         Intent intent = new Intent(Quiz.this, Modules.class);
@@ -155,43 +155,71 @@ public class Quiz extends AppCompatActivity {
                 questionList.add(new QuizItem(1.3f, "Q2.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
             case 2:
-
+                questionList.add(new QuizItem(2.1f, "Q3.1", "What am I?", "stack", new String[]{"op1","op2","op3","op4"}, 1));
+                questionList.add(new QuizItem(2.2f, "Q3.2", "Who am I?", "null", new String[]{"op1","op2","op3","op4"}, 2));
+                questionList.add(new QuizItem(2.3f, "Q3.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
             case 3:
-
+                questionList.add(new QuizItem(3.1f, "Q4.1", "What am I?", "stack", new String[]{"op1","op2","op3","op4"}, 1));
+                questionList.add(new QuizItem(3.2f, "Q4.2", "Who am I?", "null", new String[]{"op1","op2","op3","op4"}, 2));
+                questionList.add(new QuizItem(3.3f, "Q4.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
             case 4:
-
+                questionList.add(new QuizItem(4.1f, "Q5.1", "What am I?", "stack", new String[]{"op1","op2","op3","op4"}, 1));
+                questionList.add(new QuizItem(4.2f, "Q5.2", "Who am I?", "null", new String[]{"op1","op2","op3","op4"}, 2));
+                questionList.add(new QuizItem(4.3f, "Q5.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
             case 5:
-
+                questionList.add(new QuizItem(5.1f, "Q6.1", "What am I?", "stack", new String[]{"op1","op2","op3","op4"}, 1));
+                questionList.add(new QuizItem(5.2f, "Q6.2", "Who am I?", "null", new String[]{"op1","op2","op3","op4"}, 2));
+                questionList.add(new QuizItem(5.3f, "Q6.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
+                //----------------------------------------------------------------------------------
             case 6:
-
+                questionList.add(new QuizItem(6.1f, "Q1.1", "What am I?", "stack", new String[]{"op1","op2","op3","op4"}, 1));
+                questionList.add(new QuizItem(6.2f, "Q1.2", "Who am I?", "null", new String[]{"op1","op2","op3","op4"}, 2));
+                questionList.add(new QuizItem(6.3f, "Q1.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
             case 7:
-
+                questionList.add(new QuizItem(7.1f, "Q2.1", "What am I?", "stack", new String[]{"op1","op2","op3","op4"}, 1));
+                questionList.add(new QuizItem(7.2f, "Q2.2", "Who am I?", "null", new String[]{"op1","op2","op3","op4"}, 2));
+                questionList.add(new QuizItem(7.3f, "Q2.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
             case 8:
-
+                questionList.add(new QuizItem(8.1f, "Q3.1", "What am I?", "stack", new String[]{"op1","op2","op3","op4"}, 1));
+                questionList.add(new QuizItem(8.2f, "Q3.2", "Who am I?", "null", new String[]{"op1","op2","op3","op4"}, 2));
+                questionList.add(new QuizItem(8.3f, "Q3.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
             case 9:
-
+                questionList.add(new QuizItem(9.1f, "Q4.1", "What am I?", "stack", new String[]{"op1","op2","op3","op4"}, 1));
+                questionList.add(new QuizItem(9.2f, "Q4.2", "Who am I?", "null", new String[]{"op1","op2","op3","op4"}, 2));
+                questionList.add(new QuizItem(9.3f, "Q4.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
             case 10:
-
+                questionList.add(new QuizItem(10.1f, "Q5.1", "What am I?", "stack", new String[]{"op1","op2","op3","op4"}, 1));
+                questionList.add(new QuizItem(10.2f, "Q5.2", "Who am I?", "null", new String[]{"op1","op2","op3","op4"}, 2));
+                questionList.add(new QuizItem(10.3f, "Q5.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
             case 11:
-
+                questionList.add(new QuizItem(11.1f, "Q6.1", "What am I?", "stack", new String[]{"op1","op2","op3","op4"}, 1));
+                questionList.add(new QuizItem(11.2f, "Q6.2", "Who am I?", "null", new String[]{"op1","op2","op3","op4"}, 2));
+                questionList.add(new QuizItem(11.3f, "Q6.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
+                //----------------------------------------------------------------------------------
             case 12:
-
+                questionList.add(new QuizItem(12.1f, "Q1.1", "What am I?", "stack", new String[]{"op1","op2","op3","op4"}, 1));
+                questionList.add(new QuizItem(12.2f, "Q1.2", "Who am I?", "null", new String[]{"op1","op2","op3","op4"}, 2));
+                questionList.add(new QuizItem(12.3f, "Q1.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
             case 13:
-
+                questionList.add(new QuizItem(13.1f, "Q2.1", "What am I?", "stack", new String[]{"op1","op2","op3","op4"}, 1));
+                questionList.add(new QuizItem(13.2f, "Q2.2", "Who am I?", "null", new String[]{"op1","op2","op3","op4"}, 2));
+                questionList.add(new QuizItem(13.3f, "Q2.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
             case 14:
-
+                questionList.add(new QuizItem(14.1f, "Q3.1", "What am I?", "stack", new String[]{"op1","op2","op3","op4"}, 1));
+                questionList.add(new QuizItem(14.2f, "Q3.2", "Who am I?", "null", new String[]{"op1","op2","op3","op4"}, 2));
+                questionList.add(new QuizItem(14.3f, "Q3.3", "Where am I?", "test", new String[]{"op1","op2","op3","op4"}, 3));
                 break;
             default:
 
