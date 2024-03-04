@@ -17,6 +17,7 @@ import java.util.List;
 
 public class UserAchievements extends AppCompatActivity {
 
+    DatabaseHelper dbHelper = new DatabaseHelper(UserAchievements.this);
     private RecyclerView achieveRecView;
     private RecyclerView.Adapter achieveAdapter;
     private RecyclerView.LayoutManager achieveLayoutMan;
@@ -31,6 +32,9 @@ public class UserAchievements extends AppCompatActivity {
         // set toolbar as action bar
         Toolbar toolbar = findViewById(R.id.toolbar_Achieve);
         setSupportActionBar(toolbar);
+
+        // check for proud achievement
+        dbHelper.updateAchievementViews(0, UserAchievements.this);
 
         // fill up the revision item list
         fillAchievementsList();

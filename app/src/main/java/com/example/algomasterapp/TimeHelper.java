@@ -45,4 +45,30 @@ public class TimeHelper {
         return cal1.equals(cal2);
     }
 
+    public boolean Is24HrReturn(Date currentTime, Date prevTime){
+
+        Calendar cal1 = Calendar.getInstance();
+        Calendar cal2 = Calendar.getInstance();
+
+        cal1.setTime(prevTime);
+        cal2.setTime(currentTime);
+
+        // Clear out the hours, minutes, seconds and milliseconds
+        cal1.set(Calendar.HOUR_OF_DAY, 0);
+        cal1.set(Calendar.MINUTE, 0);
+        cal1.set(Calendar.SECOND, 0);
+        cal1.set(Calendar.MILLISECOND, 0);
+
+        cal2.set(Calendar.HOUR_OF_DAY, 0);
+        cal2.set(Calendar.MINUTE, 0);
+        cal2.set(Calendar.SECOND, 0);
+        cal2.set(Calendar.MILLISECOND, 0);
+
+        // Add one day to the first date
+        cal1.add(Calendar.DAY_OF_MONTH, 1);
+
+        // return the result of comparison (true if it's the same as the second date)
+        return cal2.after(cal1);
+    }
+
 }

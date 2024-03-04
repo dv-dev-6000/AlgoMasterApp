@@ -139,6 +139,7 @@ public class HomeScreen extends AppCompatActivity {
             Toast toast = Toast.makeText(HomeScreen.this, "Stats Empty", Toast.LENGTH_SHORT);
             toast.show();
 
+            // if there is no user record for the user id then create one
             if (dbHelper.addNewUserRecord(0)){
                 toast = Toast.makeText(HomeScreen.this, "Update Success", Toast.LENGTH_SHORT);
                 toast.show();
@@ -146,7 +147,7 @@ public class HomeScreen extends AppCompatActivity {
         }
         else{
             // if a record exists for the user update db with a new login and log date then check for streak or 24 hr return
-
+            dbHelper.updateLoginTotal(0, HomeScreen.this);
         }
 
     }
