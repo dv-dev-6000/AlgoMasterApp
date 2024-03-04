@@ -12,6 +12,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.InputStream;
@@ -21,6 +23,7 @@ import java.util.List;
 public class HomeScreen extends AppCompatActivity {
 
     DatabaseHelper dbHelper;
+    MyApplication myApplication = new MyApplication();
 
     private Button learnButton;
     private RecyclerView revFeedRecView;
@@ -41,9 +44,21 @@ public class HomeScreen extends AppCompatActivity {
         // fill up the revision item list
         fillRevItemList();
 
+        // set up prog bar
+        getCompletionLevel();
+
         // set toolbar as action bar
         Toolbar toolbar = findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
+
+        // log in and set up global vars
+        myApplication.LogIn("User00");
+        myApplication.setUserRank(dbHelper.getUserRank(MyApplication.userID));
+        // display username/rank
+        TextView tv_Rank = findViewById(R.id.textView_homeRank);
+        tv_Rank.setText(MyApplication.userRank);
+
+
 
         learnButton = findViewById(R.id.button_Learn);
         learnButton.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +85,35 @@ public class HomeScreen extends AppCompatActivity {
 
     }
 
+    private void getCompletionLevel() {
+
+        // get all lesson data
+        List<LessonItem> lessons = dbHelper.getLessons(0);
+
+        // set bar views
+        ProgressBar pb_prog = findViewById(R.id.progressBar_Home);
+
+        pb_prog.setMax(45);
+
+        // set bar values
+        int count = 0;
+
+        for (int i = 0; i < lessons.size(); i++) {
+
+            int score;
+            if (lessons.get(i).getQuizScore() < 0) {
+                score = 0;
+            } else {
+                score = lessons.get(i).getQuizScore();
+            }
+
+            count = count + score;
+
+        }
+
+        pb_prog.setProgress(count);
+
+    }
 
     // bind the menu to the actionbar
     @Override

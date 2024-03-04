@@ -25,6 +25,12 @@ public class UserProfile extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_profile);
         setSupportActionBar(toolbar);
 
+        // set up personal info
+        TextView tv_username = findViewById(R.id.textView_ProfileUsername);
+        TextView tv_rank = findViewById(R.id.textView_ProfileRank);
+        tv_username.setText(MyApplication.username);
+        tv_rank.setText(MyApplication.userRank);
+
         // set up the total achievement counter
         String achvText = Integer.toString(dbHelper.getEarnedAchievementTotal());
         TextView tv_achvCount = findViewById(R.id.textView_ProfileAchieveCount);

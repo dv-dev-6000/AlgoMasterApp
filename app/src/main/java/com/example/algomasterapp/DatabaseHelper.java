@@ -119,6 +119,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return (rowCountNew - rowCountOld) == 1;
     }
 
+    // getRank
+    public int getUserRank(int id){
+
+        int returnMe = 0;
+
+        String qString = "SELECT * FROM " + GENERAL_STATS + " WHERE " + COLUMN_USER_ID + " = " + id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(qString, null);
+        if (cursor.moveToFirst()){
+            returnMe = cursor.getInt(1);
+        }
+        cursor.close();
+        db.close();
+
+        return returnMe;
+    }
+
     // update new login, check for streak or return
     public void updateLoginTotal(int id, Context context){
 
@@ -170,7 +187,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             AchievementEarned(12, context);
             updateStreak(id, false);
         }
-        else{ updateStreak(id, false); }
 
         // update last login date
         db = this.getWritableDatabase();
@@ -415,7 +431,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db = this.getWritableDatabase();
             db.execSQL("UPDATE " + ACHIEVEMENT_PROGRESS + " SET " + COLUMN_ACHIEVEMENT_ACTIVE + " = 1 WHERE " + COLUMN_ACHIEVEMENT_ID + " = " + id);
 
-            //db.execSQL("UPDATE " + GENERAL_STATS + " SET " + COLUMN_ACHIEVEMENTS_GAINED + " = " + COLUMN_ACHIEVEMENTS_GAINED + " + 1 WHERE " + COLUMN_USER_ID + " = " + userID);
+            db.execSQL("UPDATE " + GENERAL_STATS + " SET " + COLUMN_ACHIEVEMENTS_GAINED + " = " + COLUMN_ACHIEVEMENTS_GAINED + " + 1 WHERE " + COLUMN_USER_ID + " = " + MyApplication.userID);
             db.close();
 
             String toastString = "Achievement Unlocked:\n" + name;
