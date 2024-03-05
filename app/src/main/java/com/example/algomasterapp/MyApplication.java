@@ -8,6 +8,7 @@ public class MyApplication extends Application {
     public static String username = "DefaultUser";
     public static String userRank = "Test";
     public static int userID = 0;
+    public static boolean isGamified;
 
     public void LogIn(String name){
 
@@ -15,6 +16,10 @@ public class MyApplication extends Application {
         String nums = name.split("r")[1];
         userID = Integer.parseInt(nums);
 
+        if (userID % 2 == 0){
+            isGamified = true;
+        }
+        else{ isGamified = false; }
     }
 
     public void setUserRank(int uRank){

@@ -45,4 +45,31 @@ public class CSV_Helper {
 
         return ReadFile().get(id);
     }
+
+    public int CheckForUser(String uName, String pWord){
+
+        List<String[]> resultList = ReadFile();
+        String[] match;
+
+        for (String[] user: resultList) {
+
+            // check for matching username
+            if (user[0].equalsIgnoreCase(uName)){
+
+                // check for matching password
+                if (user[1].equals(pWord)){
+                    // return 0 SUCCESS
+                    return 0;
+                }
+                else{
+                    // return 1 INCORRECT PASSWORD
+                    return 1;
+                }
+            }
+
+        }
+
+        // return 2 WRONG USERNAME
+        return 2;
+    }
 }

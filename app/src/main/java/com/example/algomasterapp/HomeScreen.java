@@ -23,7 +23,6 @@ import java.util.List;
 public class HomeScreen extends AppCompatActivity {
 
     DatabaseHelper dbHelper;
-    MyApplication myApplication = new MyApplication();
 
     private Button learnButton;
     private RecyclerView revFeedRecView;
@@ -51,9 +50,6 @@ public class HomeScreen extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbar);
 
-        // log in and set up global vars
-        myApplication.LogIn("User00");
-        myApplication.setUserRank(dbHelper.getUserRank(MyApplication.userID));
         // display username/rank
         TextView tv_Rank = findViewById(R.id.textView_homeRank);
         tv_Rank.setText(MyApplication.userRank);
@@ -179,19 +175,19 @@ public class HomeScreen extends AppCompatActivity {
         }
 
         // get user id from global space
-        if (dbHelper.Get_IsEmpty("GENERAL_STATS", 0)){
+        if (dbHelper.Get_IsEmpty("GENERAL_STATS", MyApplication.userID)){
             Toast toast = Toast.makeText(HomeScreen.this, "Stats Empty", Toast.LENGTH_SHORT);
             toast.show();
 
             // if there is no user record for the user id then create one
-            if (dbHelper.addNewUserRecord(0)){
+            if (dbHelper.addNewUserRecord(MyApplication.userID)){
                 toast = Toast.makeText(HomeScreen.this, "Update Success", Toast.LENGTH_SHORT);
                 toast.show();
             }
         }
         else{
             // if a record exists for the user update db with a new login and log date then check for streak or 24 hr return
-            dbHelper.updateLoginTotal(0, HomeScreen.this);
+            dbHelper.updateLoginTotal(MyApplication.userID, HomeScreen.this);
         }
 
     }
