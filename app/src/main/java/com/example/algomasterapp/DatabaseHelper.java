@@ -389,14 +389,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         initialLessons.add(new LessonItem(2, 0, false, "Queue", "Introducing the queue data structure", 3, -1, false));
         initialLessons.add(new LessonItem(3, 0, false, "Circular Queue", "Optimising the queue data structure", 3, -1, false));
         initialLessons.add(new LessonItem(4, 0, false, "Linked List", "Introducing the linked list data structure", 3, -1, false));
-        initialLessons.add(new LessonItem(5, 0, false, "Use Cases", "Looking at the different use-cases for the various data structures", 3, -1, false));
+        initialLessons.add(new LessonItem(5, 0, false, "Additional Considerations", "Things to consider when selecting the appropriate data structures", 3, -1, false));
 
-        initialLessons.add(new LessonItem(6, 0, false, "Algorithm Basics", "A beginners guide to Algorithms", 3, -1, false));
-        initialLessons.add(new LessonItem(7, 0, false, "Search: Linear Search", "Introducing the linear search algorithm", 3, -1, false));
-        initialLessons.add(new LessonItem(8, 0, false, "Search: Binary Search", "Introducing the binary search algorithm", 3, -1, false));
-        initialLessons.add(new LessonItem(9, 0, false, "Sorting 1: Bubble Sort", "Introducing the bubble sort algorithm", 3, -1, false));
-        initialLessons.add(new LessonItem(10, 0, false, "Sorting 2: Insertion Sort", "Introducing the insertion sort algorithm", 3, -1, false));
-        initialLessons.add(new LessonItem(11, 0, false, "Sorting 3: Selection Sort", "Introducing the selection sort algorithm", 3, -1, false));
+
+        initialLessons.add(new LessonItem(6, 0, false, "Search: Linear Search", "Introducing the linear search algorithm", 3, -1, false));
+        initialLessons.add(new LessonItem(7, 0, false, "Search: Binary Search", "Introducing the binary search algorithm", 3, -1, false));
+        initialLessons.add(new LessonItem(8, 0, false, "Sorting 1: Bubble Sort", "Introducing the bubble sort algorithm", 3, -1, false));
+        initialLessons.add(new LessonItem(9, 0, false, "Sorting 2: Insertion Sort", "Introducing the insertion sort algorithm", 3, -1, false));
+        initialLessons.add(new LessonItem(10, 0, false, "Sorting 3: Selection Sort", "Introducing the selection sort algorithm", 3, -1, false));
+        initialLessons.add(new LessonItem(11, 0, false, "Sorting 4: Merge Sort", "Introducing the merge sort algorithm", 3, -1, false));
 
         initialLessons.add(new LessonItem(12, 0, false, "Algorithmic Complexity", "Advanced content", 3, -1, false));
         initialLessons.add(new LessonItem(13, 0, false, "Graphs & Trees 1", "Advanced content", 3, -1, false));

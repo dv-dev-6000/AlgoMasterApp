@@ -24,7 +24,7 @@
         android:layout_marginTop="10dp"
         android:fontFamily="@font/orbitron"
         android:text="Title"
-        android:textSize="20sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_Content" />
@@ -51,46 +51,50 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/test"
-                android:textSize="16sp" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/imageView_Lesson1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/button_onoff_indicator_off" />
+                app:srcCompat="@android:drawable/divider_horizontal_textfield" />
 
             <TextView
                 android:id="@+id/textView_Lesson2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test"
-                android:textSize="16sp" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/imageView_Lesson2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/button_onoff_indicator_off" />
+                app:srcCompat="@android:drawable/divider_horizontal_textfield" />
 
             <TextView
                 android:id="@+id/textView_Lesson3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test"
-                android:textSize="16sp" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/imageView_Lesson3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/button_onoff_indicator_off" />
+                app:srcCompat="@android:drawable/divider_horizontal_textfield" />
 
             <TextView
                 android:id="@+id/textView_Lesson4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/test"
-                android:textSize="16sp" />
+                android:textAlignment="center"
+                android:textSize="20sp" />
 
             <Button
                 android:id="@+id/button_LessonComplete"

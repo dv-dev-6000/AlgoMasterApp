@@ -16,10 +16,7 @@ public class MyApplication extends Application {
         String nums = name.split("r")[1];
         userID = Integer.parseInt(nums);
 
-        if (userID % 2 == 0){
-            isGamified = true;
-        }
-        else{ isGamified = false; }
+        isGamified = userID % 2 == 0;
     }
 
     public void setUserRank(int uRank){

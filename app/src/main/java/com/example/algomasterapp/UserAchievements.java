@@ -34,7 +34,7 @@ public class UserAchievements extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // check for proud achievement
-        dbHelper.updateAchievementViews(0, UserAchievements.this);
+        dbHelper.updateAchievementViews(MyApplication.userID, UserAchievements.this);
 
         // fill up the revision item list
         fillAchievementsList();

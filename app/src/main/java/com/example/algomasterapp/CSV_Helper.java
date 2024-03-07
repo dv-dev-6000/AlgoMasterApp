@@ -24,7 +24,13 @@ public class CSV_Helper {
         try {
             String csvLine;
             while ((csvLine = reader.readLine()) != null) {
-                String[] row = csvLine.split(",");
+                // get the text from csv
+                String[] row = csvLine.split(";");
+                // replace # with newline
+                for (int i = 0; i < row.length; i++) {
+                    row[i] = row[i].replaceAll("#", "\n");
+                }
+
                 resultList.add(row);
             }
         }
