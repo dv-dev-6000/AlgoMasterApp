@@ -50,7 +50,6 @@ public class Modules extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // do stuff
-                dbHelper.AchievementEarned(1, Modules.this);
                 Intent intent = new Intent(Modules.this, Lessons.class);
                 intent.putExtra("module", "m2");
                 startActivity(intent);
@@ -62,7 +61,6 @@ public class Modules extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // do stuff
-                dbHelper.AchievementEarned(2, Modules.this);
                 Intent intent = new Intent(Modules.this, Lessons.class);
                 intent.putExtra("module", "m3");
                 startActivity(intent);
@@ -74,6 +72,8 @@ public class Modules extends AppCompatActivity {
 
         // get all lesson data
         List<LessonItem> lessons = dbHelper.getLessons(0);
+        int lessonsPassed = 0;
+        int perfectLessons = 0;
 
         // set bar views
         ProgressBar pb_mod1 = findViewById(R.id.progressBar_mod1);
@@ -89,22 +89,49 @@ public class Modules extends AppCompatActivity {
 
         for (int i = 0; i < lessons.size(); i++){
 
+            // get score for current lesson
             int score;
             if (lessons.get(i).getQuizScore() < 0){
                 score = 0;
             }
-            else{score = lessons.get(i).getQuizScore(); }
+            else{
+                score = lessons.get(i).getQuizScore();
+            }
 
+            // note if current lesson is passed
+            if (lessons.get(i).getIsComplete()){
+                lessonsPassed++;
+                // if lesson is perfect add one to perfect lessons
+                if (lessons.get(i).getQuizScore() == 3){
+                    perfectLessons++;
+                }
+            }
+
+            // add current score to score count
             count = count + score;
 
+            // apply score to prog bar
             switch (i){
                 case 5:
                     bar1 = count;
                     count = 0;
+                    // check for level up
+                    if (lessonsPassed == 6){
+                        // level up
+                        dbHelper.updateUserRank(MyApplication.userID, 2);
+                        // gain achievement
+                        dbHelper.AchievementEarned(1, Modules.this);
+                    }
                     break;
                 case 11:
                     bar2 = count;
                     count = 0;
+                    if (lessonsPassed == 12){
+                        // level up
+                        dbHelper.updateUserRank(MyApplication.userID, 3);
+                        // gain achievement
+                        dbHelper.AchievementEarned(2, Modules.this);
+                    }
                     break;
                 case 14:
                     bar3 = count;
@@ -118,7 +145,14 @@ public class Modules extends AppCompatActivity {
         pb_mod2.setProgress(bar2, true);
         pb_mod3.setProgress(bar3, true);
 
+        // check for perfect module achievements
         detectPerfectModules(pb_mod1, pb_mod2, pb_mod3);
+
+        // update perfect quiz scores in db
+        dbHelper.updatePerfectTotal(MyApplication.userID, perfectLessons);
+
+        // update total lessons passed in db
+        dbHelper.updateLessonsPassedTotal(MyApplication.userID, lessonsPassed);
     }
 
     private void detectPerfectModules(ProgressBar mod1, ProgressBar mod2, ProgressBar mod3){

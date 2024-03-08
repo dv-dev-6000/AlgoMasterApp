@@ -16,6 +16,7 @@ import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    private MyApplication myApplication = new MyApplication();
     private TimeHelper timeHelper = new TimeHelper();
     private List<Achievement> initialAchievements = new ArrayList<Achievement>();
     private List<LessonItem> initialLessons = new ArrayList<LessonItem>();
@@ -136,6 +137,43 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return returnMe;
     }
 
+    // update user rank
+    public void updateUserRank(int userID, int newRank){
+
+        // called when new module unlocked
+        int currRank = getUserRank(userID);
+
+        if (newRank > currRank){
+            // update rank in db
+            SQLiteDatabase db;
+            db = this.getWritableDatabase();
+            db.execSQL("UPDATE " + GENERAL_STATS + " SET " + COLUMN_CURRENT_LEVEL + " = " + COLUMN_CURRENT_LEVEL + " + 1 WHERE " + COLUMN_USER_ID + " = " + userID);
+            db.close();
+        }
+
+        myApplication.setUserRank(getUserRank(userID));
+    }
+
+    // update perfect score count
+    public void updatePerfectTotal(int userID, int newTotal){
+
+        SQLiteDatabase db;
+        db = this.getWritableDatabase();
+        db.execSQL("UPDATE " + GENERAL_STATS + " SET " + COLUMN_LESSONS_PERFECT + " = " + newTotal + " WHERE " + COLUMN_USER_ID + " = " + userID);
+        db.close();
+
+    }
+
+    // update lessons passed
+    public void updateLessonsPassedTotal(int userID, int newTotal){
+
+        SQLiteDatabase db;
+        db = this.getWritableDatabase();
+        db.execSQL("UPDATE " + GENERAL_STATS + " SET " + COLUMN_LESSONS_COMPLETE + " = " + newTotal + " WHERE " + COLUMN_USER_ID + " = " + userID);
+        db.close();
+
+    }
+
     // update new login, check for streak or return
     public void updateLoginTotal(int id, Context context){
 
@@ -151,7 +189,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("UPDATE " + GENERAL_STATS + " SET " + COLUMN_TOTAL_LOGINS + " = " + COLUMN_TOTAL_LOGINS + " + 1 WHERE " + COLUMN_USER_ID + " = " + id);
         db.close();
 
-        // check for streak or return
         // get current streak and last login date
         String qString = "SELECT * FROM " + GENERAL_STATS + " WHERE " + COLUMN_USER_ID + " = " + id;
         db = this.getReadableDatabase();
@@ -166,7 +203,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // check for streak if not check for return
         if (timeHelper.IsNextDay(currTime ,lastLogin)){
             // update streak
-            switch(currStreak){
+            switch(currStreak+1){
                 case 2:
                     AchievementEarned(6, context);
                     break;
@@ -288,7 +325,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 db.execSQL("UPDATE " + LESSON_PROGRESS + " SET " + COLUMN_LESSON_COMPLETE + " = TRUE WHERE " + COLUMN_LESSON_ID + " = " + id);
 
                 //if lesson triggers perseverance achievement
-                if (prevScore > -1){
+                if (prevScore > -1 && prevScore < 2){
                     db.close();
                     AchievementEarned(11, context);
                 }
@@ -518,7 +555,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // data used by addAchievement function
     private void fillInitialAchievements() {
 
-        initialAchievements.add(new Achievement("Getting Started!", "Begin your first lesson.", false));
+        initialAchievements.add(new Achievement("Getting Started!", "Begin your learning adventure", false));
         initialAchievements.add(new Achievement("Level 2!", "Unlocked level 2: Algorithms", false));
         initialAchievements.add(new Achievement("Level 3!", "Unlocked level 3: Advanced", false));
         initialAchievements.add(new Achievement("DS Perfectionist!", "Get a perfect score on all data structures quiz's", false));

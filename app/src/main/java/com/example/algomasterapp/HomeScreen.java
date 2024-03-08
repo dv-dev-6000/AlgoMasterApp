@@ -62,7 +62,7 @@ public class HomeScreen extends AppCompatActivity {
             public void onClick(View v) {
 
                 dbHelper.AchievementEarned(0, HomeScreen.this );
-
+                dbHelper.updateUserRank(MyApplication.userID, 1);
                 // do stuff
                 Intent intent = new Intent(HomeScreen.this, Modules.class);
                 startActivity(intent);
