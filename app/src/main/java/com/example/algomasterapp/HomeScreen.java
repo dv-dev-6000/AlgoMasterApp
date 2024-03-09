@@ -44,7 +44,8 @@ public class HomeScreen extends AppCompatActivity {
         fillRevItemList();
 
         // set up prog bar
-        getCompletionLevel();
+        ProgressBar pb_prog = findViewById(R.id.progressBar_Home);
+        getCompletionLevel(pb_prog);
 
         // set toolbar as action bar
         Toolbar toolbar = findViewById(R.id.toolbar_home);
@@ -53,8 +54,6 @@ public class HomeScreen extends AppCompatActivity {
         // display username/rank
         TextView tv_Rank = findViewById(R.id.textView_homeRank);
         tv_Rank.setText(MyApplication.userRank);
-
-
 
         learnButton = findViewById(R.id.button_Learn);
         learnButton.setOnClickListener(new View.OnClickListener() {
@@ -79,16 +78,23 @@ public class HomeScreen extends AppCompatActivity {
         revFeedAdapter = new RecViewAdapter_RevFeed(revItemList, HomeScreen.this);
         revFeedRecView.setAdapter(revFeedAdapter);
 
+        // hide info for non-gamified users
+        if (!MyApplication.isGamified){
+            tv_Rank.setVisibility(View.INVISIBLE);
+            pb_prog.setVisibility(View.INVISIBLE);
+            TextView tv_1 = findViewById(R.id.textView_Home1);
+            tv_1.setText("Click Learn \nto Begin >>");
+            TextView tv_2 = findViewById(R.id.textView_Home2);
+            tv_2.setVisibility(View.INVISIBLE);
+        }
     }
 
-    private void getCompletionLevel() {
+    private void getCompletionLevel(ProgressBar pb_prog) {
 
         // get all lesson data
         List<LessonItem> lessons = dbHelper.getLessons(0);
 
         // set bar views
-        ProgressBar pb_prog = findViewById(R.id.progressBar_Home);
-
         pb_prog.setMax(45);
 
         // set bar values

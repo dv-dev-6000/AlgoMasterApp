@@ -88,6 +88,50 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowCount <= 0;
     }
 
+    public String Get_DataString(int userID){
+
+        // return vars
+        int uID =0;
+        int rank =0;
+        int lessonsComplete =0;
+        int lessonsPerfect =0;
+        int achVieved =0;
+        int achGained =0;
+        int totalLogins =0;
+        String achIDs = "-aIDs:";
+        String returnMe;
+
+        String qString = "SELECT * FROM " + GENERAL_STATS + " WHERE " + COLUMN_USER_ID + " = " + userID;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(qString, null);
+        if (cursor.moveToFirst()){
+            uID = userID;
+            rank = cursor.getInt(1);
+            lessonsComplete = cursor.getInt(2);
+            lessonsPerfect = cursor.getInt(3);
+            achVieved = cursor.getInt(4);
+            achGained = cursor.getInt(5);
+            totalLogins = cursor.getInt(6);
+        }
+        cursor.close();
+        db.close();
+
+        qString = "SELECT * FROM " + ACHIEVEMENT_PROGRESS+ " WHERE " + COLUMN_ACHIEVEMENT_ACTIVE + " = TRUE";
+        db = this.getReadableDatabase();
+        cursor = db.rawQuery(qString, null);
+        if (cursor.moveToFirst()) {
+            do {
+                achIDs = achIDs + cursor.getInt(0) + ",";
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+
+        returnMe = "ID:" + uID + "-Rnk:" + rank + "-lComp:" + lessonsComplete + "-lPerf:" + lessonsPerfect + "-aView:" + achVieved + "-aGain:" + achGained + "-logs:" + totalLogins + achIDs;
+
+        return returnMe;
+    }
+
     //region General Stats Related -----------------------------------------------------------------
 
     // add new user record
@@ -472,9 +516,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("UPDATE " + GENERAL_STATS + " SET " + COLUMN_ACHIEVEMENTS_GAINED + " = " + COLUMN_ACHIEVEMENTS_GAINED + " + 1 WHERE " + COLUMN_USER_ID + " = " + MyApplication.userID);
             db.close();
 
-            String toastString = "Achievement Unlocked:\n" + name;
-            Toast toast = Toast.makeText(context, toastString, Toast.LENGTH_SHORT);
-            toast.show();
+            if (MyApplication.isGamified){
+                String toastString = "Achievement Unlocked:\n" + name;
+                Toast toast = Toast.makeText(context, toastString, Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
 
     }

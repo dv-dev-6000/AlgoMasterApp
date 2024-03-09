@@ -35,7 +35,8 @@ public class UserProfile extends AppCompatActivity {
         tv_rank.setText(MyApplication.userRank);
 
         // set up progress bar
-        getCompletionLevel();
+        ProgressBar pb_prog = findViewById(R.id.progressBar_Profile);
+        getCompletionLevel(pb_prog);
 
         // set up the total achievement counter
         String achvText = Integer.toString(dbHelper.getEarnedAchievementTotal());
@@ -51,16 +52,39 @@ public class UserProfile extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // get data button action
+        Button getDataButton = findViewById(R.id.button_ShowData);
+        getDataButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // change this to display string in pop up window
+                tv_achvCount.setText(dbHelper.Get_DataString(MyApplication.userID));
+            }
+        });
+
+        // hide info for non-gamified users
+        if (!MyApplication.isGamified){
+            tv_rank.setVisibility(View.INVISIBLE);
+            tv_achvCount.setVisibility(View.INVISIBLE);
+            viewAchievementsButton.setEnabled(false);
+            viewAchievementsButton.setVisibility(View.INVISIBLE);
+            pb_prog.setVisibility(View.INVISIBLE);
+            TextView tv_1 = findViewById(R.id.textView_profileText1);
+            tv_1.setText("Nothing else to see here!");
+            TextView tv_2 = findViewById(R.id.textView_profileText2);
+            tv_2.setVisibility(View.INVISIBLE);
+            TextView tv_3 = findViewById(R.id.textView_profileText3);
+            tv_3.setVisibility(View.INVISIBLE);
+        }
     }
 
-    private void getCompletionLevel() {
+    private void getCompletionLevel(ProgressBar pb_prog) {
 
         // get all lesson data
         List<LessonItem> lessons = dbHelper.getLessons(0);
 
         // set bar views
-        ProgressBar pb_prog = findViewById(R.id.progressBar_Profile);
-
         pb_prog.setMax(45);
 
         // set bar values

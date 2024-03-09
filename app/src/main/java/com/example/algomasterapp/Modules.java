@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -31,7 +32,10 @@ public class Modules extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // determine module completion level
-        getCompletionLevels();
+        ProgressBar pb_mod1 = findViewById(R.id.progressBar_mod1);
+        ProgressBar pb_mod2 = findViewById(R.id.progressBar_mod2);
+        ProgressBar pb_mod3 = findViewById(R.id.progressBar_mod3);
+        getCompletionLevels(pb_mod1, pb_mod2, pb_mod3);
 
         // Set up module buttons
         mod1 = findViewById(R.id.button_m1);
@@ -66,9 +70,35 @@ public class Modules extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // hide info for non-gamified users
+        if (!MyApplication.isGamified){
+
+            pb_mod1.setVisibility(View.INVISIBLE);
+            pb_mod2.setVisibility(View.INVISIBLE);
+            pb_mod3.setVisibility(View.INVISIBLE);
+            TextView tv_1 = findViewById(R.id.textView_Modules1);
+            tv_1.setVisibility(View.INVISIBLE);
+            TextView tv_2 = findViewById(R.id.textView_Modules2);
+            tv_2.setVisibility(View.INVISIBLE);
+            TextView tv_3 = findViewById(R.id.textView_Modules3);
+            tv_3.setVisibility(View.INVISIBLE);
+        }
+        else{
+            // disable buttons based on user level
+            mod2.setEnabled(false);
+            mod3.setEnabled(false);
+
+            if (MyApplication.userRank.equals("Expert")){
+                mod2.setEnabled(true);
+            }
+            if(MyApplication.userRank.equals("Master")){
+                mod3.setEnabled(true);
+            }
+        }
     }
 
-    private void getCompletionLevels() {
+    private void getCompletionLevels(ProgressBar pb_mod1, ProgressBar pb_mod2, ProgressBar pb_mod3) {
 
         // get all lesson data
         List<LessonItem> lessons = dbHelper.getLessons(0);
@@ -76,9 +106,6 @@ public class Modules extends AppCompatActivity {
         int perfectLessons = 0;
 
         // set bar views
-        ProgressBar pb_mod1 = findViewById(R.id.progressBar_mod1);
-        ProgressBar pb_mod2 = findViewById(R.id.progressBar_mod2);
-        ProgressBar pb_mod3 = findViewById(R.id.progressBar_mod3);
         pb_mod1.setMax(18);
         pb_mod2.setMax(18);
         pb_mod3.setMax(9);

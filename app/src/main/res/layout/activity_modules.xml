@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="Button"
+        android:text="View Lessons"
         app:layout_constraintBottom_toBottomOf="@+id/moduleBackOne"
         app:layout_constraintEnd_toEndOf="@+id/moduleBackOne"
         app:layout_constraintStart_toStartOf="@+id/moduleBackOne" />
@@ -49,7 +49,7 @@
         android:fontFamily="@font/orbitron"
         android:text="Data Structures"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView14"
+        app:layout_constraintBottom_toTopOf="@+id/textView_Modules1"
         app:layout_constraintEnd_toEndOf="@+id/moduleBackOne"
         app:layout_constraintStart_toStartOf="@+id/moduleBackOne" />
 
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toTopOf="@+id/moduleBackOne" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/textView_Modules1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -97,7 +97,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="Button"
+        android:text="View Lessons"
         app:layout_constraintBottom_toBottomOf="@+id/moduleBackTwo"
         app:layout_constraintEnd_toEndOf="@+id/moduleBackTwo"
         app:layout_constraintStart_toStartOf="@+id/moduleBackTwo" />
@@ -110,7 +110,7 @@
         android:fontFamily="@font/orbitron"
         android:text="Algorithms"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView15"
+        app:layout_constraintBottom_toTopOf="@+id/textView_Modules2"
         app:layout_constraintEnd_toEndOf="@+id/moduleBackTwo"
         app:layout_constraintStart_toStartOf="@+id/moduleBackTwo" />
 
@@ -128,7 +128,7 @@
         app:layout_constraintTop_toTopOf="@+id/moduleBackTwo" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/textView_Modules2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -158,7 +158,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:text="Button"
+        android:text="View Lessons"
         app:layout_constraintBottom_toBottomOf="@+id/moduleBackThree"
         app:layout_constraintEnd_toEndOf="@+id/moduleBackThree"
         app:layout_constraintStart_toStartOf="@+id/moduleBackThree" />
@@ -171,7 +171,7 @@
         android:fontFamily="@font/orbitron"
         android:text="Advanced"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView16"
+        app:layout_constraintBottom_toTopOf="@+id/textView_Modules3"
         app:layout_constraintEnd_toEndOf="@+id/moduleBackThree"
         app:layout_constraintStart_toStartOf="@+id/moduleBackThree" />
 
@@ -189,7 +189,7 @@
         app:layout_constraintTop_toTopOf="@+id/moduleBackThree" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/textView_Modules3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"

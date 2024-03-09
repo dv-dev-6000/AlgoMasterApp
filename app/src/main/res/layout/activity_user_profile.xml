@@ -11,11 +11,11 @@
         android:layout_width="0dp"
         android:layout_height="75dp"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_ProfileRank"
+        app:layout_constraintTop_toBottomOf="@+id/button_ShowData"
         app:srcCompat="@color/material_dynamic_neutral90" />
 
     <TextView
@@ -76,7 +76,7 @@
         app:layout_constraintStart_toStartOf="@+id/imageView7" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/textView_profileText3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -113,7 +113,7 @@
         app:layout_constraintStart_toStartOf="@+id/imageView8" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/textView_profileText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
@@ -125,7 +125,7 @@
         app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textView_profileText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -144,6 +144,16 @@
         android:textSize="34sp"
         app:layout_constraintEnd_toEndOf="@+id/imageView8"
         app:layout_constraintStart_toStartOf="@+id/imageView8"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_profileText1" />
+
+    <Button
+        android:id="@+id/button_ShowData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="Show Research Data"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_ProfileRank" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
