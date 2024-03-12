@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast toast = Toast.makeText(MainActivity.this, "Welcome " + uName, Toast.LENGTH_SHORT);
                         toast.show();
 
-                        Intent intent = new Intent(MainActivity.this, HomeScreen.class);
+                        Intent intent = new Intent(getApplicationContext(), HomeScreen.class);
                         startActivity(intent);
                     }
                     else if (result == 1){

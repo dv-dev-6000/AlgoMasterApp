@@ -37,48 +37,57 @@
         android:layout_marginEnd="10dp"
         android:text="TextView"
         android:textAlignment="center"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_QuizQuestion" />
 
     <TextView
         android:id="@+id/textViewA"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="10dp"
         android:text="Option"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/radioGroup_Quiz"
         app:layout_constraintTop_toTopOf="@+id/radioGroup_Quiz" />
 
     <TextView
         android:id="@+id/textViewB"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
+        android:layout_marginEnd="10dp"
         android:text="Option"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textViewA"
         app:layout_constraintTop_toBottomOf="@+id/textViewA" />
 
     <TextView
         android:id="@+id/textViewC"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
+        android:layout_marginEnd="10dp"
         android:text="Option"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textViewB"
         app:layout_constraintTop_toBottomOf="@+id/textViewB" />
 
     <TextView
         android:id="@+id/textViewD"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
+        android:layout_marginEnd="10dp"
         android:text="Option"
         android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textViewC"
         app:layout_constraintTop_toBottomOf="@+id/textViewC" />
 

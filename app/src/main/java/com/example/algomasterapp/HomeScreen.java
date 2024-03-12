@@ -141,12 +141,15 @@ public class HomeScreen extends AppCompatActivity {
     }
 
     private void fillRevItemList() {
-        RevisionItem test1 = new RevisionItem("Did You Know?", "the revision feed contains helpful tips and reminders reflecting on modules you have completed", false, "");
-        RevisionItem test2 = new RevisionItem("Remember!", "Complete all the lessons in a module to unlock new content", true, "test");
-        RevisionItem test3 = new RevisionItem("Remember!", "Check your profile to review your achievements", false, "");
-        RevisionItem test4 = new RevisionItem("Remember!", "Check \n your profile to \n review your achievements", false, "");
-        RevisionItem test5 = new RevisionItem("Remember!", "Check \nyour profile \nto review \nyour achievements", true, "stack");
-        RevisionItem test6 = new RevisionItem("Remember!", "Check your profile to review your achievements", false, "");
+        RevisionItem test1 = new RevisionItem("Hello!", "Welcome to the AlgoMaster App. To help you get started, we've added some tips on how to use the app to the welcome feed. \n\nPlease have a scroll to see what features are available in your version.", false, "");
+        RevisionItem test2 = new RevisionItem("Learn!", "Click the learn button above to jump straight to the lessons and get learning.", false, "");
+        RevisionItem test3 = new RevisionItem("Modules!", "The prototype contains three modules for you to work through, each module contains a number of short lessons on topics related to algorithms and data structures", false, "");
+        RevisionItem test4 = new RevisionItem("Quiz Time!", "Each lesson has a short quiz which consists of 3 questions, answer 2 correctly to pass or all 3 for a perfect score.", false, "");
+        RevisionItem test5 = new RevisionItem("Gamification!", "If you can see your rank and progress bar on this screen then your using the gamified version. \n\nBe sure to check in on your achievements from time to time and monitor your progress to unlock more content.", false, "");
+        RevisionItem test6 = new RevisionItem("No Visible Rank?", "if you cant see your rank on this page, then your using the regular version. \n\nEnjoy unrestricted access to all module content from the start", false, "");
+        RevisionItem test7 = new RevisionItem("Achievements!", "Use the dropdown menu (top right) to visit your user profile. \n\nFrom here, gamified users can can track their overall progress and view their Achievements. \n\nYou can also get info on how to unlock any achievements you still need to earn.", false, "");
+        RevisionItem test8 = new RevisionItem("Progress!", "Gamified users can also track their progress. \n\nComplete lesson quiz's to level up your rank, as your rank increases, you can unlock access to more advanced modules.", true, "");
+        RevisionItem test9 = new RevisionItem("Finishing Up!", "Once your finished trialing the app please remember to fill out the user survey linked in the sign up sheet. \n\nYou'll be asked for your user data sting so please take a note of this before you uninstall the app, you can get this using the button in your user profile. \n\nThe survey and user data are critical to supporting the research. Please do complete the survey, the data generated will be useful even if you have not used the application often. \n\nThanks", false, "");
 
         revItemList.add(test1);
         revItemList.add(test2);
@@ -154,6 +157,9 @@ public class HomeScreen extends AppCompatActivity {
         revItemList.add(test4);
         revItemList.add(test5);
         revItemList.add(test6);
+        revItemList.add(test7);
+        revItemList.add(test8);
+        revItemList.add(test9);
     }
 
     private void InitialDBSetup() {
@@ -161,34 +167,34 @@ public class HomeScreen extends AppCompatActivity {
         dbHelper = new DatabaseHelper(HomeScreen.this);
 
         if (dbHelper.Get_IsEmpty("ACHIEVEMENT_PROGRESS", -1)){
-            Toast toast = Toast.makeText(HomeScreen.this, "Loading Achievements", Toast.LENGTH_SHORT);
-            toast.show();
+            //Toast toast = Toast.makeText(HomeScreen.this, "Loading Achievements", Toast.LENGTH_SHORT);
+            //toast.show();
 
             if (dbHelper.addAchievements()){
-                toast = Toast.makeText(HomeScreen.this, "Update Success", Toast.LENGTH_SHORT);
-                toast.show();
+                //toast = Toast.makeText(HomeScreen.this, "Update Success", Toast.LENGTH_SHORT);
+                //toast.show();
             }
         }
 
         if (dbHelper.Get_IsEmpty("LESSON_PROGRESS", -1)){
-            Toast toast = Toast.makeText(HomeScreen.this, "Loading Lessons", Toast.LENGTH_SHORT);
-            toast.show();
+            //Toast toast = Toast.makeText(HomeScreen.this, "Loading Lessons", Toast.LENGTH_SHORT);
+            //toast.show();
 
             if (dbHelper.addLessons()){
-                toast = Toast.makeText(HomeScreen.this, "Update Success", Toast.LENGTH_SHORT);
-                toast.show();
+                //toast = Toast.makeText(HomeScreen.this, "Update Success", Toast.LENGTH_SHORT);
+                //toast.show();
             }
         }
 
         // get user id from global space
         if (dbHelper.Get_IsEmpty("GENERAL_STATS", MyApplication.userID)){
-            Toast toast = Toast.makeText(HomeScreen.this, "Stats Empty", Toast.LENGTH_SHORT);
-            toast.show();
+            //Toast toast = Toast.makeText(HomeScreen.this, "Stats Empty", Toast.LENGTH_SHORT);
+            //toast.show();
 
             // if there is no user record for the user id then create one
             if (dbHelper.addNewUserRecord(MyApplication.userID)){
-                toast = Toast.makeText(HomeScreen.this, "Update Success", Toast.LENGTH_SHORT);
-                toast.show();
+                //toast = Toast.makeText(HomeScreen.this, "Update Success", Toast.LENGTH_SHORT);
+                //toast.show();
             }
         }
         else{

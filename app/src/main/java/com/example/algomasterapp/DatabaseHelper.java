@@ -98,7 +98,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int achVieved =0;
         int achGained =0;
         int totalLogins =0;
-        String achIDs = "-aIDs:";
+        String achIDs = "";
         String returnMe;
 
         String qString = "SELECT * FROM " + GENERAL_STATS + " WHERE " + COLUMN_USER_ID + " = " + userID;
@@ -127,7 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
 
-        returnMe = "ID:" + uID + "-Rnk:" + rank + "-lComp:" + lessonsComplete + "-lPerf:" + lessonsPerfect + "-aView:" + achVieved + "-aGain:" + achGained + "-logs:" + totalLogins + achIDs;
+        returnMe = uID + "-" + rank + "-" + lessonsComplete + "-" + lessonsPerfect + "-" + achVieved + "-" + achGained + "-" + totalLogins + "-" + achIDs;
 
         return returnMe;
     }
@@ -480,9 +480,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         initialLessons.add(new LessonItem(10, 0, false, "Sorting 3: Selection Sort", "Introducing the selection sort algorithm", 3, -1, false));
         initialLessons.add(new LessonItem(11, 0, false, "Sorting 4: Merge Sort", "Introducing the merge sort algorithm", 3, -1, false));
 
-        initialLessons.add(new LessonItem(12, 0, false, "Algorithmic Complexity", "Advanced content", 3, -1, false));
-        initialLessons.add(new LessonItem(13, 0, false, "Graphs & Trees 1", "Advanced content", 3, -1, false));
-        initialLessons.add(new LessonItem(14, 0, false, "Graphs & Trees 2", "Advanced content", 3, -1, false));
+        initialLessons.add(new LessonItem(12, 0, false, "Algorithmic Complexity", "An overview of algorithmic complexity and big O notation", 3, -1, false));
+        initialLessons.add(new LessonItem(13, 0, false, "Doubly linked lists", "Advanced Lists", 3, -1, false));
+        initialLessons.add(new LessonItem(14, 0, false, "Binary Trees", "Advanced Data Structures", 3, -1, false));
 
     }
     //endregion ------------------------------------------------------------------------------------

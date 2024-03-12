@@ -40,6 +40,7 @@ public class CSV_Helper {
         finally {
             try {
                 inputStream.close();
+                reader.close();
             } catch (IOException e) {
                 throw new RuntimeException("Error while closing input stream: " + e);
             }

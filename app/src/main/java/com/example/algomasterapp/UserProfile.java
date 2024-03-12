@@ -1,8 +1,10 @@
 package com.example.algomasterapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -58,8 +60,21 @@ public class UserProfile extends AppCompatActivity {
         getDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // change this to display string in pop up window
-                tv_achvCount.setText(dbHelper.Get_DataString(MyApplication.userID));
+
+                // get data string
+                String message = dbHelper.Get_DataString(MyApplication.userID);
+
+                // show score pop up
+                AlertDialog.Builder quizResultsAlert = new AlertDialog.Builder(UserProfile.this);
+                quizResultsAlert.setTitle("User Data String");
+                quizResultsAlert.setMessage(message);
+                quizResultsAlert.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                quizResultsAlert.create().show();
             }
         });
 
