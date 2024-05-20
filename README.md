@@ -1,1 +1,3 @@
-test ![alt text](https://github.com/dv-dev-6000/ForgottenVale/blob/master/FV%20Gallery/Cap.PNG)
+<img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/Screenshot_20240520-164746.png" width="180" height="400" />  <img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/Screenshot_20240520-164812.png" width="180" height="400" />  <img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/Screenshot_20240520-164859.png" width="180" height="400" /> 
+
+<img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/Screenshot_20240520-164918.png" width="180" height="400" />  <img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/Screenshot_20240520-164928.png" width="180" height="400" />  <img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/Screenshot_20240520-164941.png" width="180" height="400" />
