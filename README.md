@@ -6,14 +6,17 @@ To facilitate A/B testing the application has two versions, one featuring gamifi
 <br><br>
 The app collects user data in the background including information about: which achievements users unlock, how frequently users log in, how regularly certain actions are taken, how many lessons users complete, the highest rank users achieve, as well other data elements which can help determine how users interact with the application. 
 
-# About the Project
+# Gallery
+<br><br>
+### <div align="center"> Project Summary Poster </div>
+<div align="center"> <img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/Poster.png" /> </div>
+<br><br>
 
-
-
-Gallery
-
+### <div align="center"> Application Screenshots </div>
 <div align="center"> <img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/Screenshot_20240520-164746.png" width="180" height="400" />  <img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/Screenshot_20240520-164812.png" width="180" height="400" />  <img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/Screenshot_20240520-164859.png" width="180" height="400" /> </div>
 
 <div align="center"> <img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/Screenshot_20240520-164918.png" width="180" height="400" />  <img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/Screenshot_20240520-164928.png" width="180" height="400" />  <img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/Screenshot_20240520-164941.png" width="180" height="400" /> </div>
+<br><br>
 
+### <div align="center"> Design Prototype </div>
 <div align="center"> <img src="https://github.com/dv-dev-6000/AlgoMasterApp/blob/master/AlgoMaster_Gallery/AlgoMasterActivityDia.png" width="574" height="717" /> </div>
